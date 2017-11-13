@@ -1,0 +1,35 @@
+body {
+    background-color: white;
+}
+
+table {
+	width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+    height: 30px;
+}
+
+th {
+	background-color: lightgrey;
+}
+
+td {
+	background-color: white;
+}
+
+.name {
+    width: 20%;
+} 
+
+.frameheader {
+    width: 7%;
+} 
+
+.totalheader {
+    width: 10%;
+} 
+
+

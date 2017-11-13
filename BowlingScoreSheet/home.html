@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="public/stylesheet.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="lib/bowling.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bowling Scoresheet</title>
+</head>
+
+<body>
+  <H1 style="text-align: center;">Bowling Score Sheet</H1>
+  
+  <div id='pindeck' style="text-align: center;color: black;">
+   <img src="img/Single-Pin.gif" id='pin1' alt="5pin" height="86" width="40"> 
+   <img src="img/Single-Pin.gif" id='pin2' alt="5pin" height="86" width="40"> 
+   <img src="img/Single-Pin.gif" id='pin3' alt="5pin" height="86" width="40"> 
+   <img src="img/Single-Pin.gif" id='pin4' alt="5pin" height="86" width="40"> 
+   <img src="img/Single-Pin.gif" id='pin5' alt="5pin" height="86" width="40"> 
+  </div>
+  
+  <p>
+  
+  <div id="bowlingTable">
+    <table >
+      <thead>
+        <tr>
+          <th class="name" colspan="1">Name</th>
+          <th class="frameheader" colspan="3">1</th>
+          <th class="frameheader" colspan="3">2</th>
+          <th class="frameheader" colspan="3">3</th>
+          <th class="frameheader" colspan="3">4</th>
+          <th class="frameheader" colspan="3">5</th>
+          <th class="frameheader" colspan="3">6</th>
+          <th class="frameheader" colspan="3">7</th>
+          <th class="frameheader" colspan="3">8</th>
+          <th class="frameheader" colspan="3">9</th>
+          <th class="frameheader" colspan="3">10</th>
+          <th class="totalheader" colspan="1">Total Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="2" class="name"></td>
+          <td frame="1" ball="1" class="ballbox"></td>
+          <td frame="1" ball="2" class="ballbox"></td>
+          <td frame="1" ball="3" class="ballbox"></td>
+          <td frame="2" ball="1" class="ballbox"></td>
+          <td frame="2" ball="2" class="ballbox"></td>
+          <td frame="2" ball="3" class="ballbox"></td>
+          <td frame="3" ball="1" class="ballbox"></td>
+          <td frame="3" ball="2" class="ballbox"></td>
+          <td frame="3" ball="3" class="ballbox"></td>
+          <td frame="4" ball="1" class="ballbox"></td>
+          <td frame="4" ball="2" class="ballbox"></td>
+          <td frame="4" ball="3" class="ballbox"></td>
+          <td frame="5" ball="1" class="ballbox"></td>
+          <td frame="5" ball="2" class="ballbox"></td>
+          <td frame="5" ball="3" class="ballbox"></td>
+          <td frame="6" ball="1" class="ballbox"></td>
+          <td frame="6" ball="2" class="ballbox"></td>
+          <td frame="6" ball="3" class="ballbox"></td>
+          <td frame="7" ball="1" class="ballbox"></td>
+          <td frame="7" ball="2" class="ballbox"></td>
+          <td frame="7" ball="3" class="ballbox"></td>
+          <td frame="8" ball="1" class="ballbox"></td>
+          <td frame="8" ball="2" class="ballbox"></td>
+          <td frame="8" ball="3" class="ballbox"></td>
+          <td frame="9" ball="1" class="ballbox"></td>
+          <td frame="9" ball="2" class="ballbox"></td>
+          <td frame="9" ball="3" class="ballbox"></td>
+          <td frame="10" ball="1" class="ballbox"></td>
+          <td frame="10" ball="2" class="ballbox"></td>
+          <td frame="10" ball="3" class="ballbox"></td>
+          <td rowspan="2"class="totalscorebox"></td>
+        </tr>
+        <tr>
+          <td class="framescore" colspan="3"></td>
+          <td class="framescore" colspan="3"></td>
+          <td class="framescore" colspan="3"></td>
+          <td class="framescore" colspan="3"></td>
+          <td class="framescore" colspan="3"></td>
+          <td class="framescore" colspan="3"></td>
+          <td class="framescore" colspan="3"></td>
+          <td class="framescore" colspan="3"></td>
+          <td class="framescore" colspan="3"></td>
+          <td class="framescore" colspan="3"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div id="result"> 
+  </div>
+
+</body>
+</html>
