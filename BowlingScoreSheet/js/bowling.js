@@ -1,3 +1,13 @@
+function openNav() {
+    document.getElementById("sideNavigation").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+}
+ 
+function closeNav() {
+    document.getElementById("sideNavigation").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+}
+
 $(document).ready(function(){
 	 $('#bowlingTable').on('click', 'td', function(){
 		 var column_num = parseInt( $(this).index() ) + 1;
@@ -25,11 +35,11 @@ $(document).ready(function(){
          } 
 	});
 	$('#pindeck').on('click', 'img', function() {
-		var imgsrc = $(this).attr('src');
-		if (imgsrc == 'img/Single-Pin.gif' ) {
-			$(this).attr('src', 'img/Blank_button.png');
+		var imgsrc = $(this).attr('class');
+		if (imgsrc == 'pinUp' ) {
+			$(this).attr('class', 'pinDown');
 		} else {
-			$(this).attr('src', 'img/Single-Pin.gif');
+			$(this).attr('class', 'pinUp');
 		}
 	});
 });

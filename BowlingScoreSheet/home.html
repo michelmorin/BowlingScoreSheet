@@ -1,22 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="public/stylesheet.css">
+  <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="lib/bowling.js"></script>
+  <script src="js/bowling.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bowling Scoresheet</title>
 </head>
 
 <body>
+	<div id="sideNavigation" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">About</a>
+  <a href="#">Features</a>
+  <a href="#">Contact Us</a>
+	</div>
+ 
+<nav class="topnav">
+  <a href="#" onclick="openNav()">
+    <svg width="30" height="30" id="icoOpen">
+        <path d="M0,5 30,5" stroke="#000" stroke-width="5"/>
+        <path d="M0,14 30,14" stroke="#000" stroke-width="5"/>
+        <path d="M0,23 30,23" stroke="#000" stroke-width="5"/>
+    </svg>
+  </a>
+</nav>
+ 
+<div id="main">
+
   <H1 style="text-align: center;">Bowling Score Sheet</H1>
   
   <div id='pindeck' style="text-align: center;color: black;">
-   <img src="img/Single-Pin.gif" id='pin1' alt="5pin" height="86" width="40"> 
-   <img src="img/Single-Pin.gif" id='pin2' alt="5pin" height="86" width="40"> 
-   <img src="img/Single-Pin.gif" id='pin3' alt="5pin" height="86" width="40"> 
-   <img src="img/Single-Pin.gif" id='pin4' alt="5pin" height="86" width="40"> 
-   <img src="img/Single-Pin.gif" id='pin5' alt="5pin" height="86" width="40"> 
+  	<table>
+  		<tr>
+  			<td rowspan="4" class="ballarrow"><i class="fa fa-arrow-circle-left" style="font-size:36px"></i></td>
+  			<td rowspan="2"><img src="img/Single-Pin.gif" id='pin1' alt="5pin" height="86" width="40"></td>
+  			<td></td>
+  			<td></td>
+  			<td></td>
+  			<td rowspan="2"><img src="img/Single-Pin.gif" id='pin5' alt="5pin" height="86" width="40"> </td>
+  			<td rowspan="4" class="ballarrow"><i class="fa fa-arrow-circle-right" style="font-size:36px"></i></td>
+  		</tr>
+  		<tr>
+  			<td rowspan="2"><img src="img/Single-Pin.gif" id='pin2' alt="5pin" height="86" width="40"> </td>
+  			<td></td>
+  			<td rowspan="2"><img src="img/Single-Pin.gif" id='pin4' alt="5pin" height="86" width="40"> </td>
+  		</tr>
+  		<tr>
+  			<td></td>
+  			<td rowspan="2"><img src="img/Single-Pin.gif" id='pin3' alt="5pin" height="86" width="40"></td>
+  			<td></td>
+  		</tr>
+  		<tr>
+  			<td></td>
+  			<td></td>
+  			<td></td>
+  			<td></td>
+  		</tr>
+  	</table>
+  	
+  	
+
+   
+    
   </div>
   
   <p>
@@ -25,7 +72,7 @@
     <table >
       <thead>
         <tr>
-          <th class="name" colspan="1">Name</th>
+          <th colspan="1">Name</th>
           <th class="frameheader" colspan="3">1</th>
           <th class="frameheader" colspan="3">2</th>
           <th class="frameheader" colspan="3">3</th>
@@ -41,7 +88,7 @@
       </thead>
       <tbody>
         <tr>
-          <td rowspan="2" class="name"></td>
+          <td rowspan="2" class="name">Michel</td>
           <td frame="1" ball="1" class="ballbox"></td>
           <td frame="1" ball="2" class="ballbox"></td>
           <td frame="1" ball="3" class="ballbox"></td>
@@ -91,6 +138,8 @@
   </div>
   
   <div id="result"> 
+  </div>
+  
   </div>
 
 </body>
