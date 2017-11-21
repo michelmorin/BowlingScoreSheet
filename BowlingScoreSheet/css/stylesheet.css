@@ -12,12 +12,14 @@ body {
 
 #pindeck th, #pindeck td {
     height: 43px;
+    width: 50px;
     align-content: center;
 }
 
 #bowlingTable table {
-	width: 100%;
+	width: 97%;
     border-collapse: collapse;
+    
 }
 
 #bowlingTable th, #bowlingTable td {
