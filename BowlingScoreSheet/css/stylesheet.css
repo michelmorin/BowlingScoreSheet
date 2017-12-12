@@ -39,7 +39,7 @@ body {
     width: 20%;
     text-align: center;
     font-weight: bold;
-    font-size: 150%;
+    font-size: 25px;
 } 
 
 .frameheader {
@@ -50,12 +50,8 @@ body {
     width: 10%;
 } 
 
-.pinUp {
-	opacity:0.1;
-}
-
 .pinDown {
-	opacity:1;
+	opacity:0.1;
 }
 
 .ballarrow {

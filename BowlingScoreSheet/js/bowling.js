@@ -35,11 +35,6 @@ $(document).ready(function(){
          } 
 	});
 	$('#pindeck').on('click', 'img', function() {
-		var imgsrc = $(this).attr('class');
-		if (imgsrc == 'pinUp' ) {
-			$(this).attr('class', 'pinDown');
-		} else {
-			$(this).attr('class', 'pinUp');
-		}
+		$(this).toggleClass('pinDown')
 	});
 });
