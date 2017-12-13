@@ -10,9 +10,8 @@ function closeNav() {
 
 $(document).ready(function(){
 	 $('#bowlingTable').on('click', 'td', function(){
-		 var column_num = parseInt( $(this).index() ) + 1;
-         var row_num = parseInt( $(this).parent().index() )+1;   
          var tdclass = $(this).attr("class"); 
+         var game = $(this).attr("game"); 
          var frame = $(this).attr("frame"); 
          var ball = $(this).attr("ball");
          
@@ -22,17 +21,39 @@ $(document).ready(function(){
          if (tdclass == "totalscorebox") {
          	$("#result").html("");
          }
-         if (tdclass == "framescore") {
-         	 $("#result").html("Frame "+ column_num + " , Ball 1");
-         	 var self = this,
-        		 old_bg = this.style.backgroundColor;
-
-    			 this.style.backgroundColor ='blue';
-        		 self.style.backgroundColor = old_bg;
-         } 
-         if (tdclass == "ballbox") {
-         	 $("#result").html("Frame "+ frame + " , Ball " + ball );
-         } 
+	});
+	 
+	 $('.name .totalscorebox').on('click', function(){
+			$('td').removeClass('active');  
+			$("#result").html("");
+		}); 
+	 
+	$('#frames td').on('click', function(){
+		var id = $(this).attr('id');
+		var idArray = id.split("-");
+		var game = idArray[0]
+		var frame = idArray[1]
+		$('td').removeClass('active');  
+		$(this).addClass('active');
+		$('#'+id+'-1').addClass('active');  
+		$("#result").html("Game " + game + " Frame " + frame + " Ball 1" );
+	}); 
+	$('#balls td').on('click', function(){
+		var id = $(this).attr('id');
+		var idArray = id.split("-");
+		var game = idArray[0]
+		var frame = idArray[1]
+		var ball = idArray[2]
+		$('td').removeClass('active');  
+		$(this).addClass('active');
+		$('#'+idArray[0]+'-'+idArray[1]).addClass('active');  
+		$("#result").html("Game " + game + " Frame " + frame + " Ball " + ball );
+	}); 
+	$('#bowlingTable td').on('mouseover', function(){
+		$(this).addClass('highlight');
+	});
+	$('#bowlingTable td').on('mouseout', function(){
+		$(this).removeClass('highlight');
 	});
 	$('#pindeck').on('click', 'img', function() {
 		$(this).toggleClass('pinDown')

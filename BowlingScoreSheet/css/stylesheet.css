@@ -32,7 +32,7 @@ body {
 }
 
 #bowlingTable td {
-	background-color: white;
+	//background-color: white;
 }
 
 .name {
@@ -52,6 +52,14 @@ body {
 
 .pinDown {
 	opacity:0.1;
+}
+
+.highlight {
+	background-color: lightblue;
+}
+
+.active {
+	background-color: lightgreen;
 }
 
 .ballarrow {
