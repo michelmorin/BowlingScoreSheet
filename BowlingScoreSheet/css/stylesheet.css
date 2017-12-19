@@ -25,6 +25,8 @@ body {
 #bowlingTable th, #bowlingTable td {
     border: 1px solid black;
     height: 30px;
+    width: 15px;
+    text-align: center;
 }
 
 #bowlingTable th {
