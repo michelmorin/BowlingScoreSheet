@@ -46,6 +46,13 @@ body {
     padding: 10px
 }
 
+.totalscorebox {
+	font-weight: bold;
+    font-size: 25px;
+    padding: 10px
+}
+
+
 .frameheader {
     width: 7%;
 } 
