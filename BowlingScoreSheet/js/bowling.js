@@ -61,6 +61,29 @@ $(document).ready(function(){
 		$('#'+game+'-'+player+'-'+frame).addClass('active');  
 		selectedFrameID = id;
 		
+		var currentPoints = $('#'+game+'-'+player+'-'+frame+'-'+ball).attr('points');
+		
+		if (ball == "2" || ball == "3") {
+			var currentPinsDown = $('#'+game+'-'+player+'-'+frame+'-'+ball).attr('pins');
+
+			if (currentPinsDown == "1-1-1-1-1" && currentPoints == "0") {
+				ball = parseInt(ball) - 1;
+				if (ball == 2) {
+					var currentPoints = $('#'+game+'-'+player+'-'+frame+'-'+ball).attr('points');
+					var currentPinsDown = $('#'+game+'-'+player+'-'+frame+'-'+ball).attr('pins');
+					if(currentPinsDown == "1-1-1-1-1" && currentPoints == "0") {
+						ball = parseInt(ball) - 1;
+					}
+				}
+				$('#'+game+'-'+player+'-'+frame+'-'+ball).click();
+				return;
+			}
+		}
+		
+		if ( $('#'+selectedFrameID).attr('points') == "0") {
+			$('#'+selectedFrameID).text("0");
+		}
+		
 		setPinDeckOnSelection();	
 	}); 
 	$('#bowlingTable td').on('mouseover', function(){
@@ -75,6 +98,7 @@ $(document).ready(function(){
 			$('#1-1-1-1').click();
 			return;
 		}
+		
 		var currentSelectedItem = selectedFrameID.split("-");
 		var game = currentSelectedItem[0]
 		var player = currentSelectedItem[1]
@@ -94,6 +118,11 @@ $(document).ready(function(){
 			var frame = parseInt(frame) + 1;
 			var ball = 1;
 		}
+		
+		if ( $('#'+selectedFrameID).attr('points') == "0") {
+			$('#'+selectedFrameID).text("0");
+		}
+		
 		$('#'+game+'-'+player+'-'+frame+'-'+ball).click();
 	});
 	$('#prevBall').on('click', function() {
