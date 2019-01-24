@@ -53,13 +53,13 @@ $(document).ready(function() {
 		}
 	});
 
-	$('.name, .totalscorebox').on('click', function() {
+	$('.totalscorebox').on('click', function() {
 		$('td').removeClass('active');
 		$('#result').html('');
 		selectedFrameID = null;
 	});
 
-	$('.name').on('dblclick', function() {
+	/*$('.name').on('dblclick', function() {
 		var OriginalContent = $(this).text();
 
 		$(this).html("<input class='edit-name' type='text' value='" + OriginalContent + "' />");
@@ -75,7 +75,7 @@ $(document).ready(function() {
 		$(this).children().first().blur(function() {
 			$(this).parent().text(OriginalContent);
 		});
-	});
+	}); */
 
 	$('#frames td').on('click', function() {
 		var id = $(this).attr('id');
