@@ -1,0 +1,89 @@
+body {
+	background-color: white;
+	overflow-x: hidden;
+	margin: 5px;
+}
+
+#pindeck table {
+	margin: 0px auto;
+	border-collapse: collapse;
+}
+
+#pindeck th,
+#pindeck td {
+	height: 43px;
+	width: 50px;
+	align-content: center;
+}
+
+.hidden {
+	display: none;
+}
+
+.bowlingTable table {
+	width: 97%;
+	border-collapse: collapse;
+}
+
+.bowlingTable th,
+.bowlingTable td {
+	border: 1px solid black;
+	height: 30px;
+	width: 15px;
+	text-align: center;
+}
+
+.bowlingTable th {
+	background-color: lightgrey;
+}
+
+.name {
+	width: 100px;
+	min-width: 100px;
+	max-width: 100px;
+	font-weight: bold;
+	font-size: 25px;
+	padding: 10px;
+}
+
+.edit-name {
+	width: 100px;
+	min-width: 100px;
+	max-width: 100px;
+	font-weight: bold;
+	font-size: 25px;
+	padding: 10px;
+}
+
+.totalscorebox {
+	width: 50px;
+	min-width: 50px;
+	max-width: 50px;
+	font-weight: bold;
+	font-size: 25px;
+	padding: 10px;
+}
+
+.frameheader {
+	width: 7%;
+}
+
+.totalheader {
+	width: 10%;
+}
+
+.pinDown {
+	opacity: 0.1;
+}
+
+.highlight {
+	background-color: lightblue;
+}
+
+.active {
+	background-color: lightgreen;
+}
+
+.ballarrow {
+	padding: 30px;
+}
