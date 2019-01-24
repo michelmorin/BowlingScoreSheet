@@ -230,11 +230,6 @@ $(document).ready(function() {
 		selectedPin(4, 2);
 	});
 
-	$('#missed').on('click', function() {
-		//selectedPin(-1, 0);
-		console.log('missed shot');
-	});
-
 	function selectedPin() {
 		var pinNumber = arguments[0];
 		var pinValue = arguments[1];
@@ -276,6 +271,22 @@ $(document).ready(function() {
 
 		if (pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '1-1-1-1-1' && ball == '1') {
 			$('#' + selectedFrameID).text('X');
+		} else if (pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '1-1-1-1-0' && ball == '1') {
+			$('#' + selectedFrameID).text('R');
+		} else if (pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '0-1-1-1-1' && ball == '1') {
+			$('#' + selectedFrameID).text('L');
+		} else if (pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '0-1-1-1-0' && ball == '1') {
+			$('#' + selectedFrameID).text('A');
+		} else if (pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '1-1-1-0-0' && ball == '1') {
+			$('#' + selectedFrameID).text('C');
+		} else if (pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '0-0-1-1-1' && ball == '1') {
+			$('#' + selectedFrameID).text('C');
+		} else if (pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '0-0-1-0-0' && ball == '1') {
+			$('#' + selectedFrameID).text('H');
+		} else if (pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '0-0-1-1-0' && ball == '1') {
+			$('#' + selectedFrameID).text('S');
+		} else if (pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '0-1-1-0-0' && ball == '1') {
+			$('#' + selectedFrameID).text('S');
 		} else if (
 			pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '1-1-1-1-1' &&
 			ball == '2' &&
@@ -722,5 +733,25 @@ $(document).ready(function() {
 			$('#' + game + '-' + player + '-' + frame).text(framePoints.toString());
 			$('#total-' + game + '-' + player).text(framePoints.toString());
 		}
+		var teamPinfall = 0;
+		if ($('#total-' + game + '-1').text() != '') {
+			teamPinfall += parseInt($('#total-' + game + '-1').text(), 10);
+		}
+		if ($('#total-' + game + '-2').text() != '') {
+			teamPinfall += parseInt($('#total-' + game + '-2').text(), 10);
+		}
+		if ($('#total-' + game + '-3').text() != '') {
+			teamPinfall += parseInt($('#total-' + game + '-3').text(), 10);
+		}
+		if ($('#total-' + game + '-4').text() != '') {
+			teamPinfall += parseInt($('#total-' + game + '-4').text(), 10);
+		}
+		if ($('#total-' + game + '-5').text() != '') {
+			teamPinfall += parseInt($('#total-' + game + '-5').text(), 10);
+		}
+		if ($('#total-' + game + '-6').text() != '') {
+			teamPinfall += parseInt($('#total-' + game + '-6').text(), 10);
+		}
+		$('#teamPinfall').text(teamPinfall.toString());
 	}
 });

@@ -24,9 +24,14 @@ body {
 	display: none;
 }
 
+#teamPinfallDiv {
+	float: right;
+}
+
 .bowlingTable table {
-	width: 97%;
+	width: 100%;
 	border-collapse: collapse;
+	margin: 0 auto;
 }
 
 .bowlingTable th,
@@ -53,27 +58,9 @@ body {
 	height: 60px;
 	font-weight: bold;
 	font-size: 25px;
-	/*border: 0;*/
+	border: 0;
 	text-align: center;
 }
-
-/*.name {
-	width: 100px;
-	min-width: 100px;
-	max-width: 100px;
-	font-weight: bold;
-	font-size: 25px;
-	padding: 10px;
-}
-
-.edit-name {
-	width: 100px;
-	min-width: 100px;
-	max-width: 100px;
-	font-weight: bold;
-	font-size: 25px;
-	padding: 10px;
-} */
 
 .totalscorebox {
 	width: 50px;
@@ -96,14 +83,6 @@ body {
 	opacity: 0.1;
 }
 
-.highlight {
-	background-color: lightblue;
-}
-
 .active {
 	background-color: lightgreen;
-}
-
-.ballarrow {
-	padding: 30px;
 }
