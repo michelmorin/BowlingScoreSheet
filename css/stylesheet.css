@@ -9,6 +9,10 @@ body {
 	border-collapse: collapse;
 }
 
+#pindeck {
+	margin-top: 20px;
+}
+
 #pindeck th,
 #pindeck td {
 	height: 43px;
