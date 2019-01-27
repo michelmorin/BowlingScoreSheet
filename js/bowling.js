@@ -56,13 +56,13 @@ $(document).ready(function() {
 
 	//Remember Players Name
 	$('#Oneplayer1NameInput').on('change', function() {
-		localStorage.playerNameInput1 = $(this).val();
+		//localStorage.playerNameInput1 = $(this).val();
 	});
 	$('#Oneplayer2NameInput').on('change', function() {
-		localStorage.playerNameInput2 = $(this).val();
+		//localStorage.playerNameInput2 = $(this).val();
 	});
 	$('#Oneplayer3NameInput').on('change', function() {
-		localStorage.playerNameInput3 = $(this).val();
+		//localStorage.playerNameInput3 = $(this).val();
 	});
 	/*$('#playerNameInput4').on('change', function() {
 		localStorage.playerNameInput4 = $(this).val();
