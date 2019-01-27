@@ -318,6 +318,9 @@ $(document).ready(function() {
 		$(this).toggleClass('pinDown');
 		selectedPin(4, 2, selectedFrameID);
 	});
+	$('#missedBtn').on('click', function() {
+		selectedPin(-1, 0, selectedFrameID);
+	});
 
 	//Mark a selected Pin action to add points and UI
 	function selectedPin(pinNumber, pinValue, ballFrameID) {
@@ -329,8 +332,11 @@ $(document).ready(function() {
 
 		var currentPinsDown = $('#' + ballFrameID).attr('pins').split('-');
 
-		//If the pin was up then went down then add pin value
-		if (currentPinsDown[pinNumber] == '0') {
+		//Missed Shot
+		if (currentPinsDown[pinNumber] == '-1') {
+			pinCount = pinValue;
+		} else if (currentPinsDown[pinNumber] == '0') {
+			//If the pin was up then went down then add pin value
 			currentPinsDown[pinNumber] = '1';
 			pinCount = pinValue;
 		} else {
