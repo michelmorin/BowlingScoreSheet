@@ -1,56 +1,243 @@
 $(document).ready(function() {
 	var selectedFrameID;
 
-	$('#numOfPlayers').on('change', function() {
-		var numOfPlayers = $(this).val();
+	$('#Oneplayer1NameInput').val(localStorage.playerNameInput1);
+	$('#Twoplayer1NameInput').val(localStorage.playerNameInput1);
+	$('#Threeplayer1NameInput').val(localStorage.playerNameInput1);
+	$('#Fourplayer1NameInput').val(localStorage.playerNameInput1);
+	$('#Fiveplayer1NameInput').val(localStorage.playerNameInput1);
 
-		if (numOfPlayers === '1') {
-			$('#player1Table').removeClass('hidden');
-			$('#player2Table').addClass('hidden');
-			$('#player3Table').addClass('hidden');
-			$('#player4Table').addClass('hidden');
-			$('#player5Table').addClass('hidden');
-			$('#player6Table').addClass('hidden');
-		} else if (numOfPlayers === '2') {
-			$('#player1Table').removeClass('hidden');
-			$('#player2Table').removeClass('hidden');
-			$('#player3Table').addClass('hidden');
-			$('#player4Table').addClass('hidden');
-			$('#player5Table').addClass('hidden');
-			$('#player6Table').addClass('hidden');
+	$('#Oneplayer2NameInput').val(localStorage.playerNameInput2);
+	$('#Twoplayer2NameInput').val(localStorage.playerNameInput2);
+	$('#Threeplayer2NameInput').val(localStorage.playerNameInput2);
+	$('#Fourplayer2NameInput').val(localStorage.playerNameInput2);
+	$('#Fiveplayer2NameInput').val(localStorage.playerNameInput2);
+
+	$('#Oneplayer3NameInput').val(localStorage.playerNameInput3);
+	$('#Twoplayer3NameInput').val(localStorage.playerNameInput3);
+	$('#Threeplayer3NameInput').val(localStorage.playerNameInput3);
+	$('#Fourplayer3NameInput').val(localStorage.playerNameInput3);
+	$('#Fiveplayer3NameInput').val(localStorage.playerNameInput3);
+
+	//on refresh get how many palyers and games setup when not full shift refresh
+	changeInNumPlayersOrGames();
+
+	//$('#playerNameInput2').val(localStorage.playerNameInput2);
+	//$('#playerNameInput3').val(localStorage.playerNameInput3);
+	//$('#playerNameInput4').val(localStorage.playerNameInput4);
+	//$('#playerNameInput5').val(localStorage.playerNameInput5);
+	//$('#playerNameInput6').val(localStorage.playerNameInput6);
+
+	/*$('#1-1-1-1').attr('pins', localStorage['bsc-1-1-1-1']);
+	selectedFrameID = '1-1-1-1';
+	var currentPinsDown = $('#' + selectedFrameID).attr('pins').split('-');
+
+	var pin1 = currentPinsDown[0];
+	var pin2 = currentPinsDown[1];
+	var pin3 = currentPinsDown[2];
+	var pin4 = currentPinsDown[3];
+	var pin5 = currentPinsDown[4];
+	//if Pin1 is down, then call below
+	if (pin1 == '1') {
+		selectedPin(0, 2);
+	}
+	if (pin2 == '1') {
+		selectedPin(1, 3);
+	}
+	if (pin3 == '1') {
+		selectedPin(2, 5);
+	}
+	if (pin4 == '1') {
+		selectedPin(3, 3);
+	}
+	if (pin5 == '1') {
+		selectedPin(4, 2);
+	}*/
+
+	//Remember Players Name
+	$('#Oneplayer1NameInput').on('change', function() {
+		localStorage.playerNameInput1 = $(this).val();
+	});
+	$('#Oneplayer2NameInput').on('change', function() {
+		localStorage.playerNameInput2 = $(this).val();
+	});
+	$('#Oneplayer3NameInput').on('change', function() {
+		localStorage.playerNameInput3 = $(this).val();
+	});
+	/*$('#playerNameInput4').on('change', function() {
+		localStorage.playerNameInput4 = $(this).val();
+	});
+	$('#playerNameInput5').on('change', function() {
+		localStorage.playerNameInput5 = $(this).val();
+	});
+	$('#playerNameInput6').on('change', function() {
+		localStorage.playerNameInput6 = $(this).val();
+	});*/
+
+	//If of number of games or number of players need to call same functions to below
+	//so proper game selected and number of players is only shown and rest is hidden
+
+	function changeInNumPlayersOrGames() {
+		let numOfGames = $('#numOfGames').val();
+		let numOfPlayers = $('#numOfPlayers').val();
+		if (numOfGames === '1') {
+			if (numOfPlayers === '1') {
+				$('#Oneplayer1Table').removeClass('hidden');
+				$('#Oneplayer2Table').addClass('hidden');
+				$('#Oneplayer3Table').addClass('hidden');
+			}
+			if (numOfPlayers === '2') {
+				$('#Oneplayer1Table').removeClass('hidden');
+				$('#Oneplayer2Table').removeClass('hidden');
+				$('#Oneplayer3Table').addClass('hidden');
+			}
+			if (numOfPlayers === '3') {
+				$('#Oneplayer1Table').removeClass('hidden');
+				$('#Oneplayer2Table').removeClass('hidden');
+				$('#Oneplayer3Table').removeClass('hidden');
+			}
+			$('#Twoplayer1Table').addClass('hidden');
+			$('#Twoplayer2Table').addClass('hidden');
+			$('#Twoplayer3Table').addClass('hidden');
+			$('#Threeplayer1Table').addClass('hidden');
+			$('#Threeplayer2Table').addClass('hidden');
+			$('#Threeplayer3Table').addClass('hidden');
+			$('#Fourplayer1Table').addClass('hidden');
+			$('#Fourplayer2Table').addClass('hidden');
+			$('#Fourplayer3Table').addClass('hidden');
+			$('#Fiveplayer1Table').addClass('hidden');
+			$('#Fiveplayer2Table').addClass('hidden');
+			$('#Fiveplayer3Table').addClass('hidden');
+			calculateTeamPinfall('1');
 		}
-		if (numOfPlayers === '3') {
-			$('#player1Table').removeClass('hidden');
-			$('#player2Table').removeClass('hidden');
-			$('#player3Table').removeClass('hidden');
-			$('#player4Table').addClass('hidden');
-			$('#player5Table').addClass('hidden');
-			$('#player6Table').addClass('hidden');
+		if (numOfGames === '2') {
+			if (numOfPlayers === '1') {
+				$('#Twoplayer1Table').removeClass('hidden');
+				$('#Twoplayer2Table').addClass('hidden');
+				$('#Twoplayer3Table').addClass('hidden');
+			}
+			if (numOfPlayers === '2') {
+				$('#Twoplayer1Table').removeClass('hidden');
+				$('#Twoplayer2Table').removeClass('hidden');
+				$('#Twoplayer3Table').addClass('hidden');
+			}
+			if (numOfPlayers === '3') {
+				$('#Twoplayer1Table').removeClass('hidden');
+				$('#Twoplayer2Table').removeClass('hidden');
+				$('#Twoplayer3Table').removeClass('hidden');
+			}
+			$('#Oneplayer1Table').addClass('hidden');
+			$('#Oneplayer2Table').addClass('hidden');
+			$('#Oneplayer3Table').addClass('hidden');
+			$('#Threeplayer1Table').addClass('hidden');
+			$('#Threeplayer2Table').addClass('hidden');
+			$('#Threeplayer3Table').addClass('hidden');
+			$('#Fourplayer1Table').addClass('hidden');
+			$('#Fourplayer2Table').addClass('hidden');
+			$('#Fourplayer3Table').addClass('hidden');
+			$('#Fiveplayer1Table').addClass('hidden');
+			$('#Fiveplayer2Table').addClass('hidden');
+			$('#Fiveplayer3Table').addClass('hidden');
+			calculateTeamPinfall('2');
 		}
-		if (numOfPlayers === '4') {
-			$('#player1Table').removeClass('hidden');
-			$('#player2Table').removeClass('hidden');
-			$('#player3Table').removeClass('hidden');
-			$('#player4Table').removeClass('hidden');
-			$('#player5Table').addClass('hidden');
-			$('#player6Table').addClass('hidden');
+		if (numOfGames === '3') {
+			if (numOfPlayers === '1') {
+				$('#Threeplayer1Table').removeClass('hidden');
+				$('#Threeplayer2Table').addClass('hidden');
+				$('#Threeplayer3Table').addClass('hidden');
+			}
+			if (numOfPlayers === '2') {
+				$('#Threeplayer1Table').removeClass('hidden');
+				$('#Threeplayer2Table').removeClass('hidden');
+				$('#Threeplayer3Table').addClass('hidden');
+			}
+			if (numOfPlayers === '3') {
+				$('#Threeplayer1Table').removeClass('hidden');
+				$('#Threeplayer2Table').removeClass('hidden');
+				$('#Threeplayer3Table').removeClass('hidden');
+			}
+			$('#Oneplayer1Table').addClass('hidden');
+			$('#Oneplayer2Table').addClass('hidden');
+			$('#Oneplayer3Table').addClass('hidden');
+			$('#Twoplayer1Table').addClass('hidden');
+			$('#Twoplayer2Table').addClass('hidden');
+			$('#Twoplayer3Table').addClass('hidden');
+			$('#Fourplayer1Table').addClass('hidden');
+			$('#Fourplayer2Table').addClass('hidden');
+			$('#Fourplayer3Table').addClass('hidden');
+			$('#Fiveplayer1Table').addClass('hidden');
+			$('#Fiveplayer2Table').addClass('hidden');
+			$('#Fiveplayer3Table').addClass('hidden');
+			calculateTeamPinfall('3');
 		}
-		if (numOfPlayers === '5') {
-			$('#player1Table').removeClass('hidden');
-			$('#player2Table').removeClass('hidden');
-			$('#player3Table').removeClass('hidden');
-			$('#player4Table').removeClass('hidden');
-			$('#player5Table').removeClass('hidden');
-			$('#player6Table').addClass('hidden');
+		if (numOfGames === '4') {
+			if (numOfPlayers === '1') {
+				$('#Fourplayer1Table').removeClass('hidden');
+				$('#Fourplayer2Table').addClass('hidden');
+				$('#Fourplayer3Table').addClass('hidden');
+			}
+			if (numOfPlayers === '2') {
+				$('#Fourplayer1Table').removeClass('hidden');
+				$('#Fourplayer2Table').removeClass('hidden');
+				$('#Fourplayer3Table').addClass('hidden');
+			}
+			if (numOfPlayers === '3') {
+				$('#Fourplayer1Table').removeClass('hidden');
+				$('#Fourplayer2Table').removeClass('hidden');
+				$('#Fourplayer3Table').removeClass('hidden');
+			}
+			$('#Oneplayer1Table').addClass('hidden');
+			$('#Oneplayer2Table').addClass('hidden');
+			$('#Oneplayer3Table').addClass('hidden');
+			$('#Twoplayer1Table').addClass('hidden');
+			$('#Twoplayer2Table').addClass('hidden');
+			$('#Twoplayer3Table').addClass('hidden');
+			$('#Threeplayer1Table').addClass('hidden');
+			$('#Threeplayer2Table').addClass('hidden');
+			$('#Threeplayer3Table').addClass('hidden');
+			$('#Fiveplayer1Table').addClass('hidden');
+			$('#Fiveplayer2Table').addClass('hidden');
+			$('#Fiveplayer3Table').addClass('hidden');
+			calculateTeamPinfall('4');
 		}
-		if (numOfPlayers === '6') {
-			$('#player1Table').removeClass('hidden');
-			$('#player2Table').removeClass('hidden');
-			$('#player3Table').removeClass('hidden');
-			$('#player4Table').removeClass('hidden');
-			$('#player5Table').removeClass('hidden');
-			$('#player6Table').removeClass('hidden');
+		if (numOfGames === '5') {
+			if (numOfPlayers === '1') {
+				$('#Fiveplayer1Table').removeClass('hidden');
+				$('#Fiveplayer2Table').addClass('hidden');
+				$('#Fiveplayer3Table').addClass('hidden');
+			}
+			if (numOfPlayers === '2') {
+				$('#Fiveplayer1Table').removeClass('hidden');
+				$('#Fiveplayer2Table').removeClass('hidden');
+				$('#Fiveplayer3Table').addClass('hidden');
+			}
+			if (numOfPlayers === '3') {
+				$('#Fiveplayer1Table').removeClass('hidden');
+				$('#Fiveplayer2Table').removeClass('hidden');
+				$('#Fiveplayer3Table').removeClass('hidden');
+			}
+			$('#Oneplayer1Table').addClass('hidden');
+			$('#Oneplayer2Table').addClass('hidden');
+			$('#Oneplayer3Table').addClass('hidden');
+			$('#Twoplayer1Table').addClass('hidden');
+			$('#Twoplayer2Table').addClass('hidden');
+			$('#Twoplayer3Table').addClass('hidden');
+			$('#Threeplayer1Table').addClass('hidden');
+			$('#Threeplayer2Table').addClass('hidden');
+			$('#Threeplayer3Table').addClass('hidden');
+			$('#Fourplayer1Table').addClass('hidden');
+			$('#Fourplayer2Table').addClass('hidden');
+			$('#Fourplayer3Table').addClass('hidden');
+			calculateTeamPinfall('5');
 		}
+	}
+
+	$('#numOfGames').on('change', function() {
+		changeInNumPlayersOrGames();
+	});
+
+	$('#numOfPlayers').on('change', function() {
+		changeInNumPlayersOrGames();
 	});
 
 	$('.totalscorebox').on('click', function() {
@@ -58,24 +245,6 @@ $(document).ready(function() {
 		$('#result').html('');
 		selectedFrameID = null;
 	});
-
-	/*$('.name').on('dblclick', function() {
-		var OriginalContent = $(this).text();
-
-		$(this).html("<input class='edit-name' type='text' value='" + OriginalContent + "' />");
-		$(this).children().first().focus();
-
-		$(this).children().first().keypress(function(e) {
-			if (e.which == 13) {
-				var newContent = $(this).val();
-				$(this).parent().text(newContent);
-			}
-		});
-
-		$(this).children().first().blur(function() {
-			$(this).parent().text(OriginalContent);
-		});
-	}); */
 
 	$('#frames td').on('click', function() {
 		var id = $(this).attr('id');
@@ -88,9 +257,9 @@ $(document).ready(function() {
 		$('#' + game + '-' + player + '-' + frame + '-1').addClass('active');
 		selectedFrameID = id + '-1';
 
-		setPinDeckOnSelection();
+		setPinDeckOnSelection(selectedFrameID);
 	});
-	$('#balls td').on('click', function() {
+	$('.ballFrame').on('click', function() {
 		var id = $(this).attr('id');
 		var idArray = id.split('-');
 		var game = idArray[0];
@@ -125,136 +294,47 @@ $(document).ready(function() {
 			}
 		}
 
-		//This added the 0 score automatically on click which we don't want anymore
-		/*if ($('#' + selectedFrameID).attr('points') == '0') {
-			$('#' + selectedFrameID).text('0');
-		}*/
-
-		setPinDeckOnSelection();
+		setPinDeckOnSelection(selectedFrameID);
 	});
-	$('#bowlingTable td').on('mouseover', function() {
-		$(this).addClass('highlight');
-	});
-	$('#bowlingTable td').on('mouseout', function() {
-		$(this).removeClass('highlight');
-	});
-	$('#nextBall').on('click', function() {
-		if (selectedFrameID == null) {
-			selectedFrameID = '1-1-1-1';
-			$('#1-1-1-1').click();
-			return;
-		}
 
-		var currentSelectedItem = selectedFrameID.split('-');
-		var game = currentSelectedItem[0];
-		var player = currentSelectedItem[1];
-		var frame = currentSelectedItem[2];
-		var ball = currentSelectedItem[3];
-		var ball = parseInt(ball) + 1;
-
-		var currentPinsDown = $('#' + selectedFrameID).attr('pins');
-
-		if (ball == 2 || ball == 3) {
-			if (currentPinsDown == '1-1-1-1-1') {
-				if (frame != '10') {
-					var frame = parseInt(frame) + 1;
-					var ball = 1;
-				}
-			}
-		}
-		if (ball == 4) {
-			var frame = parseInt(frame) + 1;
-			var ball = 1;
-			//Goto Next bowler here too if there is and if last bowler then go to first bowler and next frame unless last bowler and last frame
-		}
-
-		if ($('#' + selectedFrameID).attr('points') == '0') {
-			$('#' + selectedFrameID).text('0');
-		}
-
-		$('#' + game + '-' + player + '-' + frame + '-' + ball).click();
-	});
-	$('#prevBall').on('click', function() {
-		if (selectedFrameID == null) {
-			selectedFrameID = '1-1-1-1';
-			$('#1-1-1-1').click();
-			return;
-		}
-		var currentSelectedItem = selectedFrameID.split('-');
-		var game = currentSelectedItem[0];
-		var player = currentSelectedItem[1];
-		var frame = currentSelectedItem[2];
-		var ball = currentSelectedItem[3];
-		ball = parseInt(ball) - 1;
-
-		if (ball == 0) {
-			frame = parseInt(frame) - 1;
-			ball = 3;
-		}
-
-		var currentPoints = $('#' + game + '-' + player + '-' + frame + '-' + ball).attr('points');
-
-		if (ball == 3) {
-			var currentPinsDown = $('#' + game + '-' + player + '-' + frame + '-' + ball).attr('pins');
-
-			if (currentPinsDown == '1-1-1-1-1' && currentPoints == '0') {
-				ball = parseInt(ball) - 1;
-				var currentPoints = $('#' + game + '-' + player + '-' + frame + '-' + ball).attr('points');
-				var currentPinsDown = $('#' + game + '-' + player + '-' + frame + '-' + ball).attr('pins');
-				if (currentPinsDown == '1-1-1-1-1' && currentPoints == '0') {
-					ball = parseInt(ball) - 1;
-				}
-			}
-		}
-
-		$('#' + game + '-' + player + '-' + frame + '-' + ball).click();
-	});
+	//Listens to click on pin on the pin deck
 	$('#pin1').on('click', function() {
 		$(this).toggleClass('pinDown');
-		selectedPin(0, 2);
+		selectedPin(0, 2, selectedFrameID);
 	});
 	$('#pin2').on('click', function() {
 		$(this).toggleClass('pinDown');
-		selectedPin(1, 3);
+		selectedPin(1, 3, selectedFrameID);
 	});
 	$('#pin3').on('click', function() {
 		$(this).toggleClass('pinDown');
-		selectedPin(2, 5);
+		selectedPin(2, 5, selectedFrameID);
 	});
 	$('#pin4').on('click', function() {
 		$(this).toggleClass('pinDown');
-		selectedPin(3, 3);
+		selectedPin(3, 3, selectedFrameID);
 	});
 	$('#pin5').on('click', function() {
 		$(this).toggleClass('pinDown');
-		selectedPin(4, 2);
+		selectedPin(4, 2, selectedFrameID);
 	});
 
-	function selectedPin() {
-		var pinNumber = arguments[0];
-		var pinValue = arguments[1];
-
-		var currentSelectedItem = selectedFrameID.split('-');
+	//Mark a selected Pin action to add points and UI
+	function selectedPin(pinNumber, pinValue, ballFrameID) {
+		var currentSelectedItem = ballFrameID.split('-');
 		var game = currentSelectedItem[0];
 		var player = currentSelectedItem[1];
 		var frame = currentSelectedItem[2];
 		var ball = currentSelectedItem[3];
 
-		var currentPinsDown = $('#' + selectedFrameID).attr('pins').split('-');
+		var currentPinsDown = $('#' + ballFrameID).attr('pins').split('-');
 
-		/*if (pinNumber == '-1') {
-			//Missed Shot
-			pinCount = pinValue;
-			$('#' + game + '-' + player + '-' + frame + '-' + ball.toString()).attr('points', '0');
-			$('#' + game + '-' + player + '-' + frame + '-' + ball.toString()).text('');
-		} else*/ if (
-			currentPinsDown[pinNumber] == '0'
-		) {
-			//Add 2 pins as pin was up
+		//If the pin was up then went down then add pin value
+		if (currentPinsDown[pinNumber] == '0') {
 			currentPinsDown[pinNumber] = '1';
 			pinCount = pinValue;
 		} else {
-			//Subtract 2 pins as pin was down
+			//If the pin was down then revert to up then subtract pin value
 			currentPinsDown[pinNumber] = '0';
 			pinCount = -pinValue;
 		}
@@ -264,6 +344,13 @@ $(document).ready(function() {
 		var pin3 = currentPinsDown[2];
 		var pin4 = currentPinsDown[3];
 		var pin5 = currentPinsDown[4];
+
+		//Have separate function to add points based on ballFrameID
+		//Have spearate function on add display to UI based on ballFrameID
+
+		//Store value to localStorage
+		localStorage['bsc-' + game + '-' + player + '-' + frame + '-' + ball] =
+			pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5;
 
 		var currentPoints = $('#' + selectedFrameID).attr('points');
 		var newPoints = parseInt(currentPoints) + pinCount;
@@ -349,12 +436,13 @@ $(document).ready(function() {
 			$('#' + game + '-' + player + '-' + frame + '-' + ball.toString()).text('');
 		}
 
-		onChangeCalculateAllFrameTotals();
+		onChangeCalculateAllFrameTotals(selectedFrameID);
 	}
 
-	function setPinDeckOnSelection() {
+	//Sets the PinDeck Selection on the UI
+	function setPinDeckOnSelection(ballFrameID) {
 		//Get pins down from Current and set correctly
-		var currentPinsDown = $('#' + selectedFrameID).attr('pins').split('-');
+		var currentPinsDown = $('#' + ballFrameID).attr('pins').split('-');
 		var pin1 = currentPinsDown[0];
 		var pin2 = currentPinsDown[1];
 		var pin3 = currentPinsDown[2];
@@ -387,8 +475,8 @@ $(document).ready(function() {
 		}
 	}
 
-	function onChangeCalculateAllFrameTotals() {
-		var currentSelectedItem = selectedFrameID.split('-');
+	function onChangeCalculateAllFrameTotals(ballFrameID) {
+		var currentSelectedItem = ballFrameID.split('-');
 		var game = currentSelectedItem[0];
 		var player = currentSelectedItem[1];
 		var frame = currentSelectedItem[2];
@@ -733,6 +821,30 @@ $(document).ready(function() {
 			$('#' + game + '-' + player + '-' + frame).text(framePoints.toString());
 			$('#total-' + game + '-' + player).text(framePoints.toString());
 		}
+		/*var teamPinfall = 0;
+		if ($('#total-' + game + '-1').text() != '') {
+			teamPinfall += parseInt($('#total-' + game + '-1').text(), 10);
+		}
+		if ($('#total-' + game + '-2').text() != '') {
+			teamPinfall += parseInt($('#total-' + game + '-2').text(), 10);
+		}
+		if ($('#total-' + game + '-3').text() != '') {
+			teamPinfall += parseInt($('#total-' + game + '-3').text(), 10);
+		}
+		if ($('#total-' + game + '-4').text() != '') {
+			teamPinfall += parseInt($('#total-' + game + '-4').text(), 10);
+		}
+		if ($('#total-' + game + '-5').text() != '') {
+			teamPinfall += parseInt($('#total-' + game + '-5').text(), 10);
+		}
+		if ($('#total-' + game + '-6').text() != '') {
+			teamPinfall += parseInt($('#total-' + game + '-6').text(), 10);
+		}
+		$('#teamPinfall').text(teamPinfall.toString());*/
+		calculateTeamPinfall(game);
+	}
+
+	function calculateTeamPinfall(game) {
 		var teamPinfall = 0;
 		if ($('#total-' + game + '-1').text() != '') {
 			teamPinfall += parseInt($('#total-' + game + '-1').text(), 10);
