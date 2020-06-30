@@ -1,1153 +1,182 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome 5 -->
+    <script
+      src="https://kit.fontawesome.com/de7cf715d2.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
     <title>Bowling Score Sheet</title>
-</head>
+  </head>
 
-<body>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Bowling Score Sheet</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav">
-                <form class="form-inline">
-                    <span class="navbar-text ml-sm-3">Players: </span>
-                    <select class="custom-select ml-1" id="numOfPlayers">
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3" selected>Three</option>
-                        <!-- <option value="4">Four</option>
-                        <option value="5">Five</option>
-                        <option value="6">Six</option> -->
-                    </select>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">Bowling Score Sheet</a>
+      <button
+        class="navbar-toggler"
+        data-toggle="collapse"
+        data-target="#navbarCollapse"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+          <form class="form-inline" id="gameSelectForm">
+            <span class="navbar-text text-white ml-sm-3">Game:</span>
+            <select class="custom-select ml-3" id="currentGame"> </select>
+          </form>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="newscoresheet">
+      <div class="container mt-5 mx-auto my-autos">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <div class="card shadow">
+              <h3 class="card-header">
+                New Score Sheet
+              </h3>
+              <div class="card-body">
+                <form>
+                  <div class="form-group">
+                    <label for="numOfPlayers">How Many Players:</label>
+                    <select class="custom-select" id="numOfPlayers"> </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="numOfGames">How many games:</label>
+                    <select class="custom-select" id="numOfGames"></select>
+                  </div>
+                  <div class="form-group">
+                    <button
+                      id="startbtn"
+                      type="submit"
+                      class="btn btn-primary btn-block"
+                    >
+                      Let's Start
+                    </button>
+                  </div>
                 </form>
-                <form class="form-inline">
-                        <span class="navbar-text ml-sm-3">Game: </span>
-                        <select class="custom-select ml-1" id="numOfGames">
-                            <option value="1" selected>One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                            <option value="4">Four</option>
-                            <option value="5">Five</option>
-                        </select>
-                    </form>
-              </ul>
-              
+              </div>
             </div>
-          </nav>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div id="main">
-
-        <div id='pindeck' style="text-align: center;color: black;">
-            <table>
-                <tr>
-                    <td rowspan="4"></td>
-                    <td rowspan="2"><img src="img/Single-Pin.gif" id='pin1' alt="5pin" height="86" width="40"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td rowspan="2"><img src="img/Single-Pin.gif" id='pin5' alt="5pin" height="86" width="40"> </td>
-                    <td rowspan="4"><button id="missedBtn" type="button" class="btn btn-warning ml-5" style="">Missed</button></td>
-                </tr>
-                <tr>
-                    <td rowspan="2"><img src="img/Single-Pin.gif" id='pin2' alt="5pin" height="86" width="40"> </td>
-                    <td></td>
-                    <td rowspan="2"><img src="img/Single-Pin.gif" id='pin4' alt="5pin" height="86" width="40"> </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td rowspan="2"><img src="img/Single-Pin.gif" id='pin3' alt="5pin" height="86" width="40"></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-            
-        </div>
-
-        <p>
-            <p>
-                <div id="Oneplayer1Table" class="bowlingTable">
-                    <table>
-                        <thead>
-                            <tr id='header'>
-                                <th colspan="1">Name</th>
-                                <th class="frameheader" colspan="3">1</th>
-                                <th class="frameheader" colspan="3">2</th>
-                                <th class="frameheader" colspan="3">3</th>
-                                <th class="frameheader" colspan="3">4</th>
-                                <th class="frameheader" colspan="3">5</th>
-                                <th class="frameheader" colspan="3">6</th>
-                                <th class="frameheader" colspan="3">7</th>
-                                <th class="frameheader" colspan="3">8</th>
-                                <th class="frameheader" colspan="3">9</th>
-                                <th class="frameheader" colspan="3">10</th>
-                                <th class="totalheader" colspan="1">Total Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr id='balls'>
-                                <td rowspan="2" class="playerName"><input id="Oneplayer1NameInput" class="playerNameInput" type="text" placeholder="Player 1"></td>
-                                <td class="ballFrame" id='1-1-1-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-1-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-1-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-2-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-2-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-2-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-3-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-3-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-3-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-4-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-4-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-4-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-5-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-5-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-5-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-6-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-6-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-6-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-7-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-7-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-7-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-8-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-8-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-8-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-9-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-9-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-9-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-10-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-10-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='1-1-10-3' points="0" pins="0-0-0-0-0"></td>
-                                <td id='total-1-1' rowspan="2" class="totalscorebox"></td>
-                            </tr>
-                            <tr id='frames'>
-                                <td id='1-1-1' points="0" colspan="3"></td>
-                                <td id='1-1-2' points="0" colspan="3"></td>
-                                <td id='1-1-3' points="0" colspan="3"></td>
-                                <td id='1-1-4' points="0" colspan="3"></td>
-                                <td id='1-1-5' points="0" colspan="3"></td>
-                                <td id='1-1-6' points="0" colspan="3"></td>
-                                <td id='1-1-7' points="0" colspan="3"></td>
-                                <td id='1-1-8' points="0" colspan="3"></td>
-                                <td id='1-1-9' points="0" colspan="3"></td>
-                                <td id='1-1-10' points="0" colspan="3"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <p>
-
-                    <div id="Oneplayer2Table" class="bowlingTable">
-                        <table>
-                            <thead>
-                                <tr id='header'>
-                                    <th colspan="1">Name</th>
-                                    <th class="frameheader" colspan="3">1</th>
-                                    <th class="frameheader" colspan="3">2</th>
-                                    <th class="frameheader" colspan="3">3</th>
-                                    <th class="frameheader" colspan="3">4</th>
-                                    <th class="frameheader" colspan="3">5</th>
-                                    <th class="frameheader" colspan="3">6</th>
-                                    <th class="frameheader" colspan="3">7</th>
-                                    <th class="frameheader" colspan="3">8</th>
-                                    <th class="frameheader" colspan="3">9</th>
-                                    <th class="frameheader" colspan="3">10</th>
-                                    <th class="totalheader" colspan="1">Total Score</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr id='balls'>
-                                    <td rowspan="2" class="playerName"><input id="Oneplayer2NameInput" class="playerNameInput" type="text" placeholder="Player 2"></td>
-                                    <td class="ballFrame" id='1-2-1-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-1-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-1-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-2-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-2-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-2-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-3-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-3-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-3-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-4-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-4-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-4-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-5-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-5-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-5-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-6-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-6-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-6-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-7-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-7-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-7-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-8-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-8-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-8-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-9-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-9-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-9-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-10-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-10-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='1-2-10-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td id='total-1-2' rowspan="2" class="totalscorebox"></td>
-                                </tr>
-                                <tr id='frames'>
-                                    <td id='1-2-1' points="0" colspan="3"></td>
-                                    <td id='1-2-2' points="0" colspan="3"></td>
-                                    <td id='1-2-3' points="0" colspan="3"></td>
-                                    <td id='1-2-4' points="0" colspan="3"></td>
-                                    <td id='1-2-5' points="0" colspan="3"></td>
-                                    <td id='1-2-6' points="0" colspan="3"></td>
-                                    <td id='1-2-7' points="0" colspan="3"></td>
-                                    <td id='1-2-8' points="0" colspan="3"></td>
-                                    <td id='1-2-9' points="0" colspan="3"></td>
-                                    <td id='1-2-10' points="0" colspan="3"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <p>
-
-                        <div id="Oneplayer3Table" class="bowlingTable">
-                            <table>
-                                <thead>
-                                    <tr id='header'>
-                                        <th colspan="1">Name</th>
-                                        <th class="frameheader" colspan="3">1</th>
-                                        <th class="frameheader" colspan="3">2</th>
-                                        <th class="frameheader" colspan="3">3</th>
-                                        <th class="frameheader" colspan="3">4</th>
-                                        <th class="frameheader" colspan="3">5</th>
-                                        <th class="frameheader" colspan="3">6</th>
-                                        <th class="frameheader" colspan="3">7</th>
-                                        <th class="frameheader" colspan="3">8</th>
-                                        <th class="frameheader" colspan="3">9</th>
-                                        <th class="frameheader" colspan="3">10</th>
-                                        <th class="totalheader" colspan="1">Total Score</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr id='balls'>
-                                        <td rowspan="2" class="playerName"><input id="Oneplayer3NameInput" class="playerNameInput" type="text" placeholder="Player 3"></td>
-                                        <td class="ballFrame" id='1-3-1-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-1-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-1-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-2-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-2-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-2-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-3-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-3-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-3-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-4-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-4-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-4-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-5-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-5-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-5-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-6-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-6-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-6-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-7-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-7-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-7-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-8-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-8-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-8-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-9-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-9-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-9-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-10-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-10-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='1-3-10-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td id='total-1-3' rowspan="2" class="totalscorebox"></td>
-                                    </tr>
-                                    <tr id='frames'>
-                                        <td id='1-3-1' points="0" colspan="3"></td>
-                                        <td id='1-3-2' points="0" colspan="3"></td>
-                                        <td id='1-3-3' points="0" colspan="3"></td>
-                                        <td id='1-3-4' points="0" colspan="3"></td>
-                                        <td id='1-3-5' points="0" colspan="3"></td>
-                                        <td id='1-3-6' points="0" colspan="3"></td>
-                                        <td id='1-3-7' points="0" colspan="3"></td>
-                                        <td id='1-3-8' points="0" colspan="3"></td>
-                                        <td id='1-3-9' points="0" colspan="3"></td>
-                                        <td id='1-3-10' points="0" colspan="3"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <p>
-
-  <div id="Twoplayer1Table" class="bowlingTable hidden">
-    <table>
-        <thead>
-            <tr id='header'>
-                <th colspan="1">Name</th>
-                <th class="frameheader" colspan="3">1</th>
-                <th class="frameheader" colspan="3">2</th>
-                <th class="frameheader" colspan="3">3</th>
-                <th class="frameheader" colspan="3">4</th>
-                <th class="frameheader" colspan="3">5</th>
-                <th class="frameheader" colspan="3">6</th>
-                <th class="frameheader" colspan="3">7</th>
-                <th class="frameheader" colspan="3">8</th>
-                <th class="frameheader" colspan="3">9</th>
-                <th class="frameheader" colspan="3">10</th>
-                <th class="totalheader" colspan="1">Total Score</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr id='balls'>
-                <td rowspan="2" class="playerName"><input id="Twoplayer1NameInput" class="playerNameInput" type="text" placeholder="Player 1"></td>
-                <td class="ballFrame" id='2-1-1-1' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-1-2' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-1-3' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-2-1' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-2-2' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-2-3' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-3-1' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-3-2' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-3-3' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-4-1' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-4-2' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-4-3' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-5-1' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-5-2' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-5-3' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-6-1' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-6-2' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-6-3' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-7-1' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-7-2' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-7-3' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-8-1' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-8-2' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-8-3' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-9-1' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-9-2' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-9-3' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-10-1' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-10-2' points="0" pins="0-0-0-0-0"></td>
-                <td class="ballFrame" id='2-1-10-3' points="0" pins="0-0-0-0-0"></td>
-                <td id='total-2-1' rowspan="2" class="totalscorebox"></td>
-            </tr>
-            <tr id='frames'>
-                <td id='2-1-1' points="0" colspan="3"></td>
-                <td id='2-1-2' points="0" colspan="3"></td>
-                <td id='2-1-3' points="0" colspan="3"></td>
-                <td id='2-1-4' points="0" colspan="3"></td>
-                <td id='2-1-5' points="0" colspan="3"></td>
-                <td id='2-1-6' points="0" colspan="3"></td>
-                <td id='2-1-7' points="0" colspan="3"></td>
-                <td id='2-1-8' points="0" colspan="3"></td>
-                <td id='2-1-9' points="0" colspan="3"></td>
-                <td id='2-1-10' points="0" colspan="3"></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<p>
-
-    <div id="Twoplayer2Table" class="bowlingTable hidden">
+      <div id="pindeck" class="mt-5" style="text-align: center; color: black;">
         <table>
-            <thead>
-                <tr id='header'>
-                    <th colspan="1">Name</th>
-                    <th class="frameheader" colspan="3">1</th>
-                    <th class="frameheader" colspan="3">2</th>
-                    <th class="frameheader" colspan="3">3</th>
-                    <th class="frameheader" colspan="3">4</th>
-                    <th class="frameheader" colspan="3">5</th>
-                    <th class="frameheader" colspan="3">6</th>
-                    <th class="frameheader" colspan="3">7</th>
-                    <th class="frameheader" colspan="3">8</th>
-                    <th class="frameheader" colspan="3">9</th>
-                    <th class="frameheader" colspan="3">10</th>
-                    <th class="totalheader" colspan="1">Total Score</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id='balls'>
-                    <td rowspan="2" class="playerName"><input id="Twoplayer2NameInput" class="playerNameInput" type="text" placeholder="Player 2"></td>
-                    <td class="ballFrame" id='2-2-1-1' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-1-2' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-1-3' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-2-1' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-2-2' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-2-3' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-3-1' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-3-2' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-3-3' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-4-1' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-4-2' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-4-3' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-5-1' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-5-2' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-5-3' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-6-1' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-6-2' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-6-3' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-7-1' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-7-2' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-7-3' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-8-1' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-8-2' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-8-3' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-9-1' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-9-2' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-9-3' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-10-1' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-10-2' points="0" pins="0-0-0-0-0"></td>
-                    <td class="ballFrame" id='2-2-10-3' points="0" pins="0-0-0-0-0"></td>
-                    <td id='total-2-2' rowspan="2" class="totalscorebox"></td>
-                </tr>
-                <tr id='frames'>
-                    <td id='2-2-1' points="0" colspan="3"></td>
-                    <td id='2-2-2' points="0" colspan="3"></td>
-                    <td id='2-2-3' points="0" colspan="3"></td>
-                    <td id='2-2-4' points="0" colspan="3"></td>
-                    <td id='2-2-5' points="0" colspan="3"></td>
-                    <td id='2-2-6' points="0" colspan="3"></td>
-                    <td id='2-2-7' points="0" colspan="3"></td>
-                    <td id='2-2-8' points="0" colspan="3"></td>
-                    <td id='2-2-9' points="0" colspan="3"></td>
-                    <td id='2-2-10' points="0" colspan="3"></td>
-                </tr>
-            </tbody>
+          <tr>
+            <td rowspan="4"></td>
+            <td rowspan="2">
+              <img
+                src="img/Single-Pin.gif"
+                id="pin1"
+                alt="5pin"
+                height="86"
+                width="40"
+              />
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td rowspan="2">
+              <img
+                src="img/Single-Pin.gif"
+                id="pin5"
+                alt="5pin"
+                height="86"
+                width="40"
+              />
+            </td>
+            <td rowspan="4">
+              <button
+                id="missedBtn"
+                type="button"
+                class="btn btn-warning ml-5"
+                style=""
+              >
+                Missed
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="2">
+              <img
+                src="img/Single-Pin.gif"
+                id="pin2"
+                alt="5pin"
+                height="86"
+                width="40"
+              />
+            </td>
+            <td></td>
+            <td rowspan="2">
+              <img
+                src="img/Single-Pin.gif"
+                id="pin4"
+                alt="5pin"
+                height="86"
+                width="40"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td rowspan="2">
+              <img
+                src="img/Single-Pin.gif"
+                id="pin3"
+                alt="5pin"
+                height="86"
+                width="40"
+              />
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
         </table>
+      </div>
+      <div id="scorecards"></div>
     </div>
-
-    <p>
-
-        <div id="Twoplayer3Table" class="bowlingTable hidden">
-            <table>
-                <thead>
-                    <tr id='header'>
-                        <th colspan="1">Name</th>
-                        <th class="frameheader" colspan="3">1</th>
-                        <th class="frameheader" colspan="3">2</th>
-                        <th class="frameheader" colspan="3">3</th>
-                        <th class="frameheader" colspan="3">4</th>
-                        <th class="frameheader" colspan="3">5</th>
-                        <th class="frameheader" colspan="3">6</th>
-                        <th class="frameheader" colspan="3">7</th>
-                        <th class="frameheader" colspan="3">8</th>
-                        <th class="frameheader" colspan="3">9</th>
-                        <th class="frameheader" colspan="3">10</th>
-                        <th class="totalheader" colspan="1">Total Score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr id='balls'>
-                        <td rowspan="2" class="playerName"><input id="Twoplayer3NameInput" class="playerNameInput" type="text" placeholder="Player 3"></td>
-                        <td class="ballFrame" id='2-3-1-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-1-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-1-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-2-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-2-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-2-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-3-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-3-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-3-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-4-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-4-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-4-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-5-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-5-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-5-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-6-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-6-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-6-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-7-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-7-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-7-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-8-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-8-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-8-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-9-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-9-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-9-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-10-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-10-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='2-3-10-3' points="0" pins="0-0-0-0-0"></td>
-                        <td id='total-2-3' rowspan="2" class="totalscorebox"></td>
-                    </tr>
-                    <tr id='frames'>
-                        <td id='2-3-1' points="0" colspan="3"></td>
-                        <td id='2-3-2' points="0" colspan="3"></td>
-                        <td id='2-3-3' points="0" colspan="3"></td>
-                        <td id='2-3-4' points="0" colspan="3"></td>
-                        <td id='2-3-5' points="0" colspan="3"></td>
-                        <td id='2-3-6' points="0" colspan="3"></td>
-                        <td id='2-3-7' points="0" colspan="3"></td>
-                        <td id='2-3-8' points="0" colspan="3"></td>
-                        <td id='2-3-9' points="0" colspan="3"></td>
-                        <td id='2-3-10' points="0" colspan="3"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div id="Threeplayer1Table" class="bowlingTable hidden">
-            <table>
-                <thead>
-                    <tr id='header'>
-                        <th colspan="1">Name</th>
-                        <th class="frameheader" colspan="3">1</th>
-                        <th class="frameheader" colspan="3">2</th>
-                        <th class="frameheader" colspan="3">3</th>
-                        <th class="frameheader" colspan="3">4</th>
-                        <th class="frameheader" colspan="3">5</th>
-                        <th class="frameheader" colspan="3">6</th>
-                        <th class="frameheader" colspan="3">7</th>
-                        <th class="frameheader" colspan="3">8</th>
-                        <th class="frameheader" colspan="3">9</th>
-                        <th class="frameheader" colspan="3">10</th>
-                        <th class="totalheader" colspan="1">Total Score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr id='balls'>
-                        <td rowspan="2" class="playerName"><input id="Threeplayer1NameInput" class="playerNameInput" type="text" placeholder="Player 1"></td>
-                        <td class="ballFrame" id='3-1-1-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-1-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-1-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-2-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-2-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-2-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-3-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-3-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-3-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-4-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-4-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-4-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-5-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-5-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-5-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-6-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-6-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-6-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-7-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-7-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-7-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-8-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-8-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-8-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-9-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-9-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-9-3' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-10-1' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-10-2' points="0" pins="0-0-0-0-0"></td>
-                        <td class="ballFrame" id='3-1-10-3' points="0" pins="0-0-0-0-0"></td>
-                        <td id='total-3-1' rowspan="2" class="totalscorebox"></td>
-                    </tr>
-                    <tr id='frames'>
-                        <td id='3-1-1' points="0" colspan="3"></td>
-                        <td id='3-1-2' points="0" colspan="3"></td>
-                        <td id='3-1-3' points="0" colspan="3"></td>
-                        <td id='3-1-4' points="0" colspan="3"></td>
-                        <td id='3-1-5' points="0" colspan="3"></td>
-                        <td id='3-1-6' points="0" colspan="3"></td>
-                        <td id='3-1-7' points="0" colspan="3"></td>
-                        <td id='3-1-8' points="0" colspan="3"></td>
-                        <td id='3-1-9' points="0" colspan="3"></td>
-                        <td id='3-1-10' points="0" colspan="3"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <p>
-        
-            <div id="Threeplayer2Table" class="bowlingTable hidden">
-                <table>
-                    <thead>
-                        <tr id='header'>
-                            <th colspan="1">Name</th>
-                            <th class="frameheader" colspan="3">1</th>
-                            <th class="frameheader" colspan="3">2</th>
-                            <th class="frameheader" colspan="3">3</th>
-                            <th class="frameheader" colspan="3">4</th>
-                            <th class="frameheader" colspan="3">5</th>
-                            <th class="frameheader" colspan="3">6</th>
-                            <th class="frameheader" colspan="3">7</th>
-                            <th class="frameheader" colspan="3">8</th>
-                            <th class="frameheader" colspan="3">9</th>
-                            <th class="frameheader" colspan="3">10</th>
-                            <th class="totalheader" colspan="1">Total Score</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr id='balls'>
-                            <td rowspan="2" class="playerName"><input id="Threeplayer2NameInput" class="playerNameInput" type="text" placeholder="Player 2"></td>
-                            <td class="ballFrame" id='3-2-1-1' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-1-2' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-1-3' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-2-1' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-2-2' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-2-3' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-3-1' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-3-2' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-3-3' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-4-1' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-4-2' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-4-3' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-5-1' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-5-2' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-5-3' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-6-1' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-6-2' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-6-3' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-7-1' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-7-2' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-7-3' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-8-1' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-8-2' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-8-3' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-9-1' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-9-2' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-9-3' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-10-1' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-10-2' points="0" pins="0-0-0-0-0"></td>
-                            <td class="ballFrame" id='3-2-10-3' points="0" pins="0-0-0-0-0"></td>
-                            <td id='total-3-2' rowspan="2" class="totalscorebox"></td>
-                        </tr>
-                        <tr id='frames'>
-                            <td id='3-2-1' points="0" colspan="3"></td>
-                            <td id='3-2-2' points="0" colspan="3"></td>
-                            <td id='3-2-3' points="0" colspan="3"></td>
-                            <td id='3-2-4' points="0" colspan="3"></td>
-                            <td id='3-2-5' points="0" colspan="3"></td>
-                            <td id='3-2-6' points="0" colspan="3"></td>
-                            <td id='3-2-7' points="0" colspan="3"></td>
-                            <td id='3-2-8' points="0" colspan="3"></td>
-                            <td id='3-2-9' points="0" colspan="3"></td>
-                            <td id='3-2-10' points="0" colspan="3"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        
-            <p>
-        
-                <div id="Threeplayer3Table" class="bowlingTable hidden">
-                    <table>
-                        <thead>
-                            <tr id='header'>
-                                <th colspan="1">Name</th>
-                                <th class="frameheader" colspan="3">1</th>
-                                <th class="frameheader" colspan="3">2</th>
-                                <th class="frameheader" colspan="3">3</th>
-                                <th class="frameheader" colspan="3">4</th>
-                                <th class="frameheader" colspan="3">5</th>
-                                <th class="frameheader" colspan="3">6</th>
-                                <th class="frameheader" colspan="3">7</th>
-                                <th class="frameheader" colspan="3">8</th>
-                                <th class="frameheader" colspan="3">9</th>
-                                <th class="frameheader" colspan="3">10</th>
-                                <th class="totalheader" colspan="1">Total Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr id='balls'>
-                                <td rowspan="2" class="playerName"><input id="Threeplayer3NameInput" class="playerNameInput" type="text" placeholder="Player 3"></td>
-                                <td class="ballFrame" id='3-3-1-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-1-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-1-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-2-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-2-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-2-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-3-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-3-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-3-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-4-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-4-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-4-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-5-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-5-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-5-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-6-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-6-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-6-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-7-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-7-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-7-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-8-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-8-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-8-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-9-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-9-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-9-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-10-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-10-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='3-3-10-3' points="0" pins="0-0-0-0-0"></td>
-                                <td id='total-3-3' rowspan="2" class="totalscorebox"></td>
-                            </tr>
-                            <tr id='frames'>
-                                <td id='3-3-1' points="0" colspan="3"></td>
-                                <td id='3-3-2' points="0" colspan="3"></td>
-                                <td id='3-3-3' points="0" colspan="3"></td>
-                                <td id='3-3-4' points="0" colspan="3"></td>
-                                <td id='3-3-5' points="0" colspan="3"></td>
-                                <td id='3-3-6' points="0" colspan="3"></td>
-                                <td id='3-3-7' points="0" colspan="3"></td>
-                                <td id='3-3-8' points="0" colspan="3"></td>
-                                <td id='3-3-9' points="0" colspan="3"></td>
-                                <td id='3-3-10' points="0" colspan="3"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div id="Fourplayer1Table" class="bowlingTable hidden">
-                    <table>
-                        <thead>
-                            <tr id='header'>
-                                <th colspan="1">Name</th>
-                                <th class="frameheader" colspan="3">1</th>
-                                <th class="frameheader" colspan="3">2</th>
-                                <th class="frameheader" colspan="3">3</th>
-                                <th class="frameheader" colspan="3">4</th>
-                                <th class="frameheader" colspan="3">5</th>
-                                <th class="frameheader" colspan="3">6</th>
-                                <th class="frameheader" colspan="3">7</th>
-                                <th class="frameheader" colspan="3">8</th>
-                                <th class="frameheader" colspan="3">9</th>
-                                <th class="frameheader" colspan="3">10</th>
-                                <th class="totalheader" colspan="1">Total Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr id='balls'>
-                                <td rowspan="2" class="playerName"><input id="Fourplayer1NameInput" class="playerNameInput" type="text" placeholder="Player 1"></td>
-                                <td class="ballFrame" id='4-1-1-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-1-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-1-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-2-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-2-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-2-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-3-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-3-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-3-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-4-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-4-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-4-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-5-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-5-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-5-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-6-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-6-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-6-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-7-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-7-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-7-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-8-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-8-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-8-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-9-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-9-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-9-3' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-10-1' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-10-2' points="0" pins="0-0-0-0-0"></td>
-                                <td class="ballFrame" id='4-1-10-3' points="0" pins="0-0-0-0-0"></td>
-                                <td id='total-4-1' rowspan="2" class="totalscorebox"></td>
-                            </tr>
-                            <tr id='frames'>
-                                <td id='4-1-1' points="0" colspan="3"></td>
-                                <td id='4-1-2' points="0" colspan="3"></td>
-                                <td id='4-1-3' points="0" colspan="3"></td>
-                                <td id='4-1-4' points="0" colspan="3"></td>
-                                <td id='4-1-5' points="0" colspan="3"></td>
-                                <td id='4-1-6' points="0" colspan="3"></td>
-                                <td id='4-1-7' points="0" colspan="3"></td>
-                                <td id='4-1-8' points="0" colspan="3"></td>
-                                <td id='4-1-9' points="0" colspan="3"></td>
-                                <td id='4-1-10' points="0" colspan="3"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <p>
-                
-                    <div id="Fourplayer2Table" class="bowlingTable hidden">
-                        <table>
-                            <thead>
-                                <tr id='header'>
-                                    <th colspan="1">Name</th>
-                                    <th class="frameheader" colspan="3">1</th>
-                                    <th class="frameheader" colspan="3">2</th>
-                                    <th class="frameheader" colspan="3">3</th>
-                                    <th class="frameheader" colspan="3">4</th>
-                                    <th class="frameheader" colspan="3">5</th>
-                                    <th class="frameheader" colspan="3">6</th>
-                                    <th class="frameheader" colspan="3">7</th>
-                                    <th class="frameheader" colspan="3">8</th>
-                                    <th class="frameheader" colspan="3">9</th>
-                                    <th class="frameheader" colspan="3">10</th>
-                                    <th class="totalheader" colspan="1">Total Score</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr id='balls'>
-                                    <td rowspan="2" class="playerName"><input id="Fourplayer2NameInput" class="playerNameInput" type="text" placeholder="Player 2"></td>
-                                    <td class="ballFrame" id='4-2-1-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-1-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-1-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-2-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-2-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-2-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-3-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-3-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-3-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-4-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-4-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-4-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-5-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-5-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-5-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-6-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-6-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-6-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-7-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-7-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-7-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-8-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-8-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-8-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-9-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-9-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-9-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-10-1' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-10-2' points="0" pins="0-0-0-0-0"></td>
-                                    <td class="ballFrame" id='4-2-10-3' points="0" pins="0-0-0-0-0"></td>
-                                    <td id='total-4-2' rowspan="2" class="totalscorebox"></td>
-                                </tr>
-                                <tr id='frames'>
-                                    <td id='4-2-1' points="0" colspan="3"></td>
-                                    <td id='4-2-2' points="0" colspan="3"></td>
-                                    <td id='4-2-3' points="0" colspan="3"></td>
-                                    <td id='4-2-4' points="0" colspan="3"></td>
-                                    <td id='4-2-5' points="0" colspan="3"></td>
-                                    <td id='4-2-6' points="0" colspan="3"></td>
-                                    <td id='4-2-7' points="0" colspan="3"></td>
-                                    <td id='4-2-8' points="0" colspan="3"></td>
-                                    <td id='4-2-9' points="0" colspan="3"></td>
-                                    <td id='4-2-10' points="0" colspan="3"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                
-                    <p>
-                
-                        <div id="Fourplayer3Table" class="bowlingTable hidden">
-                            <table>
-                                <thead>
-                                    <tr id='header'>
-                                        <th colspan="1">Name</th>
-                                        <th class="frameheader" colspan="3">1</th>
-                                        <th class="frameheader" colspan="3">2</th>
-                                        <th class="frameheader" colspan="3">3</th>
-                                        <th class="frameheader" colspan="3">4</th>
-                                        <th class="frameheader" colspan="3">5</th>
-                                        <th class="frameheader" colspan="3">6</th>
-                                        <th class="frameheader" colspan="3">7</th>
-                                        <th class="frameheader" colspan="3">8</th>
-                                        <th class="frameheader" colspan="3">9</th>
-                                        <th class="frameheader" colspan="3">10</th>
-                                        <th class="totalheader" colspan="1">Total Score</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr id='balls'>
-                                        <td rowspan="2" class="playerName"><input id="Fourplayer3NameInput" class="playerNameInput" type="text" placeholder="Player 3"></td>
-                                        <td class="ballFrame" id='4-3-1-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-1-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-1-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-2-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-2-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-2-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-3-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-3-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-3-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-4-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-4-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-4-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-5-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-5-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-5-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-6-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-6-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-6-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-7-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-7-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-7-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-8-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-8-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-8-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-9-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-9-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-9-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-10-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-10-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='4-3-10-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td id='total-4-3' rowspan="2" class="totalscorebox"></td>
-                                    </tr>
-                                    <tr id='frames'>
-                                        <td id='4-3-1' points="0" colspan="3"></td>
-                                        <td id='4-3-2' points="0" colspan="3"></td>
-                                        <td id='4-3-3' points="0" colspan="3"></td>
-                                        <td id='4-3-4' points="0" colspan="3"></td>
-                                        <td id='4-3-5' points="0" colspan="3"></td>
-                                        <td id='4-3-6' points="0" colspan="3"></td>
-                                        <td id='4-3-7' points="0" colspan="3"></td>
-                                        <td id='4-3-8' points="0" colspan="3"></td>
-                                        <td id='4-3-9' points="0" colspan="3"></td>
-                                        <td id='4-3-10' points="0" colspan="3"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div id="Fiveplayer1Table" class="bowlingTable hidden">
-                            <table>
-                                <thead>
-                                    <tr id='header'>
-                                        <th colspan="1">Name</th>
-                                        <th class="frameheader" colspan="3">1</th>
-                                        <th class="frameheader" colspan="3">2</th>
-                                        <th class="frameheader" colspan="3">3</th>
-                                        <th class="frameheader" colspan="3">4</th>
-                                        <th class="frameheader" colspan="3">5</th>
-                                        <th class="frameheader" colspan="3">6</th>
-                                        <th class="frameheader" colspan="3">7</th>
-                                        <th class="frameheader" colspan="3">8</th>
-                                        <th class="frameheader" colspan="3">9</th>
-                                        <th class="frameheader" colspan="3">10</th>
-                                        <th class="totalheader" colspan="1">Total Score</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr id='balls'>
-                                        <td rowspan="2" class="playerName"><input id="Fiveplayer1NameInput" class="playerNameInput" type="text" placeholder="Player 1"></td>
-                                        <td class="ballFrame" id='5-1-1-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-1-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-1-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-2-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-2-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-2-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-3-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-3-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-3-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-4-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-4-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-4-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-5-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-5-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-5-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-6-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-6-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-6-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-7-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-7-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-7-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-8-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-8-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-8-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-9-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-9-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-9-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-10-1' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-10-2' points="0" pins="0-0-0-0-0"></td>
-                                        <td class="ballFrame" id='5-1-10-3' points="0" pins="0-0-0-0-0"></td>
-                                        <td id='total-5-1' rowspan="2" class="totalscorebox"></td>
-                                    </tr>
-                                    <tr id='frames'>
-                                        <td id='5-1-1' points="0" colspan="3"></td>
-                                        <td id='5-1-2' points="0" colspan="3"></td>
-                                        <td id='5-1-3' points="0" colspan="3"></td>
-                                        <td id='5-1-4' points="0" colspan="3"></td>
-                                        <td id='5-1-5' points="0" colspan="3"></td>
-                                        <td id='5-1-6' points="0" colspan="3"></td>
-                                        <td id='5-1-7' points="0" colspan="3"></td>
-                                        <td id='5-1-8' points="0" colspan="3"></td>
-                                        <td id='5-1-9' points="0" colspan="3"></td>
-                                        <td id='5-1-10' points="0" colspan="3"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        
-                        <p>
-                        
-                            <div id="Fiveplayer2Table" class="bowlingTable hidden">
-                                <table>
-                                    <thead>
-                                        <tr id='header'>
-                                            <th colspan="1">Name</th>
-                                            <th class="frameheader" colspan="3">1</th>
-                                            <th class="frameheader" colspan="3">2</th>
-                                            <th class="frameheader" colspan="3">3</th>
-                                            <th class="frameheader" colspan="3">4</th>
-                                            <th class="frameheader" colspan="3">5</th>
-                                            <th class="frameheader" colspan="3">6</th>
-                                            <th class="frameheader" colspan="3">7</th>
-                                            <th class="frameheader" colspan="3">8</th>
-                                            <th class="frameheader" colspan="3">9</th>
-                                            <th class="frameheader" colspan="3">10</th>
-                                            <th class="totalheader" colspan="1">Total Score</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr id='balls'>
-                                            <td rowspan="2" class="playerName"><input id="Fiveplayer2NameInput" class="playerNameInput" type="text" placeholder="Player 2"></td>
-                                            <td class="ballFrame" id='5-2-1-1' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-1-2' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-1-3' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-2-1' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-2-2' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-2-3' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-3-1' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-3-2' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-3-3' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-4-1' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-4-2' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-4-3' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-5-1' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-5-2' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-5-3' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-6-1' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-6-2' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-6-3' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-7-1' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-7-2' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-7-3' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-8-1' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-8-2' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-8-3' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-9-1' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-9-2' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-9-3' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-10-1' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-10-2' points="0" pins="0-0-0-0-0"></td>
-                                            <td class="ballFrame" id='5-2-10-3' points="0" pins="0-0-0-0-0"></td>
-                                            <td id='total-5-2' rowspan="2" class="totalscorebox"></td>
-                                        </tr>
-                                        <tr id='frames'>
-                                            <td id='5-2-1' points="0" colspan="3"></td>
-                                            <td id='5-2-2' points="0" colspan="3"></td>
-                                            <td id='5-2-3' points="0" colspan="3"></td>
-                                            <td id='5-2-4' points="0" colspan="3"></td>
-                                            <td id='5-2-5' points="0" colspan="3"></td>
-                                            <td id='5-2-6' points="0" colspan="3"></td>
-                                            <td id='5-2-7' points="0" colspan="3"></td>
-                                            <td id='5-2-8' points="0" colspan="3"></td>
-                                            <td id='5-2-9' points="0" colspan="3"></td>
-                                            <td id='5-2-10' points="0" colspan="3"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        
-                            <p>
-                        
-                                <div id="Fiveplayer3Table" class="bowlingTable hidden">
-                                    <table>
-                                        <thead>
-                                            <tr id='header'>
-                                                <th colspan="1">Name</th>
-                                                <th class="frameheader" colspan="3">1</th>
-                                                <th class="frameheader" colspan="3">2</th>
-                                                <th class="frameheader" colspan="3">3</th>
-                                                <th class="frameheader" colspan="3">4</th>
-                                                <th class="frameheader" colspan="3">5</th>
-                                                <th class="frameheader" colspan="3">6</th>
-                                                <th class="frameheader" colspan="3">7</th>
-                                                <th class="frameheader" colspan="3">8</th>
-                                                <th class="frameheader" colspan="3">9</th>
-                                                <th class="frameheader" colspan="3">10</th>
-                                                <th class="totalheader" colspan="1">Total Score</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr id='balls'>
-                                                <td rowspan="2" class="playerName"><input id="Fiveplayer3NameInput" class="playerNameInput" type="text" placeholder="Player 3"></td>
-                                                <td class="ballFrame" id='5-3-1-1' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-1-2' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-1-3' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-2-1' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-2-2' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-2-3' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-3-1' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-3-2' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-3-3' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-4-1' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-4-2' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-4-3' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-5-1' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-5-2' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-5-3' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-6-1' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-6-2' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-6-3' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-7-1' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-7-2' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-7-3' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-8-1' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-8-2' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-8-3' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-9-1' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-9-2' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-9-3' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-10-1' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-10-2' points="0" pins="0-0-0-0-0"></td>
-                                                <td class="ballFrame" id='5-3-10-3' points="0" pins="0-0-0-0-0"></td>
-                                                <td id='total-5-3' rowspan="2" class="totalscorebox"></td>
-                                            </tr>
-                                            <tr id='frames'>
-                                                <td id='5-3-1' points="0" colspan="3"></td>
-                                                <td id='5-3-2' points="0" colspan="3"></td>
-                                                <td id='5-3-3' points="0" colspan="3"></td>
-                                                <td id='5-3-4' points="0" colspan="3"></td>
-                                                <td id='5-3-5' points="0" colspan="3"></td>
-                                                <td id='5-3-6' points="0" colspan="3"></td>
-                                                <td id='5-3-7' points="0" colspan="3"></td>
-                                                <td id='5-3-8' points="0" colspan="3"></td>
-                                                <td id='5-3-9' points="0" colspan="3"></td>
-                                                <td id='5-3-10' points="0" colspan="3"></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-        <p>
-
-  <div id="teamPinfallDiv"><h4>Team Pinfall: <span id="teamPinfall">0</span></h4></div>
-
-    </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
-    <script src="js/bowling.js"></script>
-</body>
-
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/app.js"></script>
+  </body>
 </html>
