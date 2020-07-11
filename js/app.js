@@ -243,7 +243,6 @@ const UICtrl = (function () {
 
       for (let index = 1; index <= parseInt(numOfGames); index++) {
         html += `<option value="${index}" selected>${index}</option>`;
-        console.log(`index is ${index}`);
       }
 
       // Insert into selector
@@ -627,7 +626,6 @@ const App = (function (ItemCtrl, StorageCtrl, UICtrl) {
       $('#result').html('');
       selectedFrameID = null;
     });
-    console.log(newScoreSheetInput);
     e.preventDefault();
   };
 
@@ -1502,6 +1500,17 @@ $('#pin5').on('click', function () {
 });
 $('#missedBtn').on('click', function () {
   selectedPin(-1, 0, selectedFrameID);
+});
+$('#nextBtn').on('click', function () {
+  //Check if nothing is selected
+  if (selectedFrameID != undefined) {
+    console.log(selectedFrameID);
+  }
+});
+$('#prevBtn').on('click', function () {
+  if (selectedFrameID != undefined) {
+    console.log(selectedFrameID);
+  }
 });
 
 // Initialize App

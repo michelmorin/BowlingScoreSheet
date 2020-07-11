@@ -71,3 +71,8 @@ body {
 .active {
   background-color: lightgreen;
 }
+
+.btn-group-vertical > button {
+  margin-bottom: 30px;
+  border-radius: 10px !important;
+}
