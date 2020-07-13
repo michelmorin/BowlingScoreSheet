@@ -7,63 +7,63 @@ const StorageCtrl = (function () {
     storeItem: function (item) {
       let items;
       // Check if any items in ls
-      if (localStorage.getItem('items') === null) {
+      if (localStorage.getItem("items") === null) {
         items = [];
         // Push new item
         items.push(item);
         // Set ls
-        localStorage.setItem('items', JSON.stringify(items));
+        localStorage.setItem("items", JSON.stringify(items));
       } else {
         // Get what is already in ls
-        items = JSON.parse(localStorage.getItem('items'));
+        items = JSON.parse(localStorage.getItem("items"));
 
         // Push new item
         items.push(item);
 
         // Re set ls
-        localStorage.setItem('items', JSON.stringify(items));
+        localStorage.setItem("items", JSON.stringify(items));
       }
     },
     getScoreSheetFromStorage: function () {
       let scoreSheet;
-      if (localStorage.getItem('bowlingScoreSheet') === null) {
+      if (localStorage.getItem("bowlingScoreSheet") === null) {
         scoreSheet = undefined;
       } else {
-        items = JSON.parse(localStorage.getItem('bowlingScoreSheet'));
+        items = JSON.parse(localStorage.getItem("bowlingScoreSheet"));
       }
       return scoreSheet;
     },
     getItemsFromStorage: function () {
       let items;
-      if (localStorage.getItem('items') === null) {
+      if (localStorage.getItem("items") === null) {
         items = [];
       } else {
-        items = JSON.parse(localStorage.getItem('items'));
+        items = JSON.parse(localStorage.getItem("items"));
       }
       return items;
     },
     updateItemStorage: function (updatedItem) {
-      let items = JSON.parse(localStorage.getItem('items'));
+      let items = JSON.parse(localStorage.getItem("items"));
 
       items.forEach(function (item, index) {
         if (updatedItem.id === item.id) {
           items.splice(index, 1, updatedItem);
         }
       });
-      localStorage.setItem('items', JSON.stringify(items));
+      localStorage.setItem("items", JSON.stringify(items));
     },
     deleteItemFromStorage: function (id) {
-      let items = JSON.parse(localStorage.getItem('items'));
+      let items = JSON.parse(localStorage.getItem("items"));
 
       items.forEach(function (item, index) {
         if (id === item.id) {
           items.splice(index, 1);
         }
       });
-      localStorage.setItem('items', JSON.stringify(items));
+      localStorage.setItem("items", JSON.stringify(items));
     },
     clearItemsFromStorage: function () {
-      localStorage.removeItem('items');
+      localStorage.removeItem("items");
     },
   };
 })();
@@ -204,14 +204,14 @@ const ItemCtrl = (function () {
 // UI Controller
 const UICtrl = (function () {
   const UISelectors = {
-    numPlayersSelect: '#numOfPlayers',
-    numGamesSelect: '#numOfGames',
-    gameSelectForm: '#gameSelectForm',
-    currentGameSelect: '#currentGame',
-    main: '#main',
-    newscoresheet: '#newscoresheet',
-    startbtn: '#startbtn',
-    scorecards: '#scorecards',
+    numPlayersSelect: "#numOfPlayers",
+    numGamesSelect: "#numOfGames",
+    gameSelectForm: "#gameSelectForm",
+    currentGameSelect: "#currentGame",
+    main: "#main",
+    newscoresheet: "#newscoresheet",
+    startbtn: "#startbtn",
+    scorecards: "#scorecards",
   };
 
   // Public methods
@@ -249,7 +249,7 @@ const UICtrl = (function () {
       document.querySelector(UISelectors.currentGameSelect).innerHTML = html;
     },
     populateScoreCards: function (numOfPlayers, numOfGames) {
-      let html = '';
+      let html = "";
 
       for (let player = 1; player <= parseInt(numOfPlayers); player++) {
         html += `<div class="card shadow mt-2">
@@ -495,23 +495,23 @@ const UICtrl = (function () {
       };
     },
     hideMain: function () {
-      document.querySelector(UISelectors.main).style.display = 'none';
+      document.querySelector(UISelectors.main).style.display = "none";
     },
     showMain: function () {
-      document.querySelector(UISelectors.main).style.display = 'block';
+      document.querySelector(UISelectors.main).style.display = "block";
     },
     hideNewScoreSheet: function () {
-      document.querySelector(UISelectors.newscoresheet).style.display = 'none';
+      document.querySelector(UISelectors.newscoresheet).style.display = "none";
     },
     showNewScoreSheet: function () {
-      document.querySelector(UISelectors.newscoresheet).style.display = 'block';
+      document.querySelector(UISelectors.newscoresheet).style.display = "block";
     },
     hideGameSelect: function () {
-      document.querySelector(UISelectors.gameSelectForm).style.display = 'none';
+      document.querySelector(UISelectors.gameSelectForm).style.display = "none";
     },
     showGameSelect: function () {
       document.querySelector(UISelectors.gameSelectForm).style.display =
-        'block';
+        "block";
     },
     getSelectors: function () {
       return UISelectors;
@@ -528,29 +528,29 @@ const App = (function (ItemCtrl, StorageCtrl, UICtrl) {
 
     document
       .querySelector(UISelectors.numPlayersSelect)
-      .addEventListener('change', changeNumberOfPlayers);
+      .addEventListener("change", changeNumberOfPlayers);
 
     document
       .querySelector(UISelectors.numGamesSelect)
-      .addEventListener('change', changeNumberOfGames);
+      .addEventListener("change", changeNumberOfGames);
 
     document
       .querySelector(UISelectors.currentGameSelect)
-      .addEventListener('change', changeCurrentGameDisplayed);
+      .addEventListener("change", changeCurrentGameDisplayed);
 
     document
       .querySelector(UISelectors.startbtn)
-      .addEventListener('click', newScoreSheet);
+      .addEventListener("click", newScoreSheet);
   };
 
   const changeNumberOfPlayers = function (e) {
-    console.log('number of players changed');
+    console.log("number of players changed");
   };
   const changeNumberOfGames = function (e) {
-    console.log('number of games changed');
+    console.log("number of games changed");
   };
   const changeCurrentGameDisplayed = function (e) {
-    console.log('Show selected game');
+    console.log("Show selected game");
   };
 
   const newScoreSheet = function (e) {
@@ -563,67 +563,28 @@ const App = (function (ItemCtrl, StorageCtrl, UICtrl) {
       newScoreSheetInput.numPlayers,
       newScoreSheetInput.numGames
     );
-    $('#frames td').on('click', function () {
-      var id = $(this).attr('id');
-      var idArray = id.split('-');
+    $("#frames td").on("click", function () {
+      var id = $(this).attr("id");
+      var idArray = id.split("-");
       var game = idArray[0];
       var player = idArray[1];
       var frame = idArray[2];
-      $('td').removeClass('active');
-      $(this).addClass('active');
-      $('#' + game + '-' + player + '-' + frame + '-1').addClass('active');
-      selectedFrameID = id + '-1';
+      $("td").removeClass("active");
+      $(this).addClass("active");
+      $("#" + game + "-" + player + "-" + frame + "-1").addClass("active");
+      selectedFrameID = id + "-1";
 
       setPinDeckOnSelection(selectedFrameID);
     });
-    $('.ballFrame').on('click', function () {
-      var id = $(this).attr('id');
-      var idArray = id.split('-');
-      var game = idArray[0];
-      var player = idArray[1];
-      var frame = idArray[2];
-      var ball = idArray[3];
-      $('td').removeClass('active');
-      $(this).addClass('active');
-      $('#' + game + '-' + player + '-' + frame).addClass('active');
-      selectedFrameID = id;
-
-      var currentPoints = $(
-        '#' + game + '-' + player + '-' + frame + '-' + ball
-      ).attr('points');
-
-      if (ball == '2' || ball == '3') {
-        var currentPinsDown = $(
-          '#' + game + '-' + player + '-' + frame + '-' + ball
-        ).attr('pins');
-
-        if (currentPinsDown == '1-1-1-1-1' && currentPoints == '0') {
-          if (frame != '10') {
-            ball = parseInt(ball) - 1;
-            if (ball == 2) {
-              var currentPoints = $(
-                '#' + game + '-' + player + '-' + frame + '-' + ball
-              ).attr('points');
-              var currentPinsDown = $(
-                '#' + game + '-' + player + '-' + frame + '-' + ball
-              ).attr('pins');
-              if (currentPinsDown == '1-1-1-1-1' && currentPoints == '0') {
-                ball = parseInt(ball) - 1;
-              }
-            }
-            $('#' + game + '-' + player + '-' + frame + '-' + ball).click();
-            return;
-          } else {
-            $('#' + selectedFrameID).attr('pins', '0-0-0-0-0');
-          }
-        }
-      }
-
-      setPinDeckOnSelection(selectedFrameID);
+    $(".ballFrame").on("click", function () {
+      $("td").removeClass("active");
+      //$(`#${selectedFrameID}`).removeClass("active");
+      //$("#" + game + "-" + player + "-" + frame).removeClass("active");
+      selectedBallFrame($(this).attr("id"));
     });
-    $('.totalscorebox').on('click', function () {
-      $('td').removeClass('active');
-      $('#result').html('');
+    $(".totalscorebox").on("click", function () {
+      $("td").removeClass("active");
+      $("#result").html("");
       selectedFrameID = null;
     });
     e.preventDefault();
@@ -635,7 +596,7 @@ const App = (function (ItemCtrl, StorageCtrl, UICtrl) {
     const input = UICtrl.getItemInput();
 
     // Check for name and calorie input
-    if (input.name !== '' && input.calories !== '') {
+    if (input.name !== "" && input.calories !== "") {
       // Add item
       const newItem = ItemCtrl.addItem(input.name, input.calories);
 
@@ -659,12 +620,12 @@ const App = (function (ItemCtrl, StorageCtrl, UICtrl) {
 
   // Click edit item
   const itemEditClick = function (e) {
-    if (e.target.classList.contains('edit-item')) {
+    if (e.target.classList.contains("edit-item")) {
       // Get list item id (item-0, item-1)
       const listId = e.target.parentNode.parentNode.id;
 
       // Break into an array
-      const listIdArr = listId.split('-');
+      const listIdArr = listId.split("-");
 
       // Get the actual id
       const id = parseInt(listIdArr[1]);
@@ -768,10 +729,10 @@ const App = (function (ItemCtrl, StorageCtrl, UICtrl) {
         // Show New Score Sheet Form
         UICtrl.hideMain();
         UICtrl.hideGameSelect();
-        console.log('Show new score sheet form to start');
+        console.log("Show new score sheet form to start");
       } else {
         // Populate list with existing Score Sheet in progress
-        console.log('Load existing Score Sheet');
+        console.log("Load existing Score Sheet");
       }
 
       // Check if any items
@@ -796,63 +757,108 @@ const App = (function (ItemCtrl, StorageCtrl, UICtrl) {
 //Sets the PinDeck Selection on the UI
 function setPinDeckOnSelection(ballFrameID) {
   //Get pins down from Current and set correctly
-  var currentPinsDown = $('#' + ballFrameID)
-    .attr('pins')
-    .split('-');
+  var currentPinsDown = $("#" + ballFrameID)
+    .attr("pins")
+    .split("-");
   var pin1 = currentPinsDown[0];
   var pin2 = currentPinsDown[1];
   var pin3 = currentPinsDown[2];
   var pin4 = currentPinsDown[3];
   var pin5 = currentPinsDown[4];
-  if (pin1 == '0') {
-    $('#pin1').removeClass('pinDown');
+  if (pin1 == "0") {
+    $("#pin1").removeClass("pinDown");
   } else {
-    $('#pin1').addClass('pinDown');
+    $("#pin1").addClass("pinDown");
   }
-  if (pin2 == '0') {
-    $('#pin2').removeClass('pinDown');
+  if (pin2 == "0") {
+    $("#pin2").removeClass("pinDown");
   } else {
-    $('#pin2').addClass('pinDown');
+    $("#pin2").addClass("pinDown");
   }
-  if (pin3 == '0') {
-    $('#pin3').removeClass('pinDown');
+  if (pin3 == "0") {
+    $("#pin3").removeClass("pinDown");
   } else {
-    $('#pin3').addClass('pinDown');
+    $("#pin3").addClass("pinDown");
   }
-  if (pin4 == '0') {
-    $('#pin4').removeClass('pinDown');
+  if (pin4 == "0") {
+    $("#pin4").removeClass("pinDown");
   } else {
-    $('#pin4').addClass('pinDown');
+    $("#pin4").addClass("pinDown");
   }
-  if (pin5 == '0') {
-    $('#pin5').removeClass('pinDown');
+  if (pin5 == "0") {
+    $("#pin5").removeClass("pinDown");
   } else {
-    $('#pin5').addClass('pinDown');
+    $("#pin5").addClass("pinDown");
   }
+}
+
+function selectedBallFrame(ballID) {
+  var idArray = ballID.split("-");
+  var game = idArray[0];
+  var player = idArray[1];
+  var frame = idArray[2];
+  var ball = idArray[3];
+  //$("td").removeClass("active");
+  $("#" + game + "-" + player + "-" + frame).addClass("active");
+  $("#" + game + "-" + player + "-" + frame + "-" + ball).addClass("active");
+  selectedFrameID = ballID;
+
+  var currentPoints = $(
+    "#" + game + "-" + player + "-" + frame + "-" + ball
+  ).attr("points");
+
+  if (ball == "2" || ball == "3") {
+    var currentPinsDown = $(
+      "#" + game + "-" + player + "-" + frame + "-" + ball
+    ).attr("pins");
+
+    if (currentPinsDown == "1-1-1-1-1" && currentPoints == "0") {
+      if (frame != "10") {
+        ball = parseInt(ball) - 1;
+        if (ball == 2) {
+          var currentPoints = $(
+            "#" + game + "-" + player + "-" + frame + "-" + ball
+          ).attr("points");
+          var currentPinsDown = $(
+            "#" + game + "-" + player + "-" + frame + "-" + ball
+          ).attr("pins");
+          if (currentPinsDown == "1-1-1-1-1" && currentPoints == "0") {
+            ball = parseInt(ball) - 1;
+          }
+        }
+        $("#" + game + "-" + player + "-" + frame + "-" + ball).click();
+        return;
+      } else {
+        $("#" + selectedFrameID).attr("pins", "0-0-0-0-0");
+      }
+    }
+  }
+
+  setPinDeckOnSelection(selectedFrameID);
 }
 
 //Mark a selected Pin action to add points and UI
 function selectedPin(pinNumber, pinValue, ballFrameID) {
-  var currentSelectedItem = ballFrameID.split('-');
+  var currentSelectedItem = ballFrameID.split("-");
   var game = currentSelectedItem[0];
   var player = currentSelectedItem[1];
   var frame = currentSelectedItem[2];
   var ball = currentSelectedItem[3];
 
-  var currentPinsDown = $('#' + ballFrameID)
-    .attr('pins')
-    .split('-');
+  var currentPinsDown = $("#" + ballFrameID)
+    .attr("pins")
+    .split("-");
 
   //Missed Shot
-  if (currentPinsDown[pinNumber] == '-1') {
+  if (currentPinsDown[pinNumber] == "-1") {
     pinCount = pinValue;
-  } else if (currentPinsDown[pinNumber] == '0') {
+  } else if (currentPinsDown[pinNumber] == "0") {
     //If the pin was up then went down then add pin value
-    currentPinsDown[pinNumber] = '1';
+    currentPinsDown[pinNumber] = "1";
     pinCount = pinValue;
   } else {
     //If the pin was down then revert to up then subtract pin value
-    currentPinsDown[pinNumber] = '0';
+    currentPinsDown[pinNumber] = "0";
     pinCount = -pinValue;
   }
 
@@ -866,589 +872,589 @@ function selectedPin(pinNumber, pinValue, ballFrameID) {
   //Have spearate function on add display to UI based on ballFrameID
 
   //Store value to localStorage
-  localStorage['bsc-' + game + '-' + player + '-' + frame + '-' + ball] =
-    pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5;
+  localStorage["bsc-" + game + "-" + player + "-" + frame + "-" + ball] =
+    pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5;
 
-  var currentPoints = $('#' + selectedFrameID).attr('points');
+  var currentPoints = $("#" + selectedFrameID).attr("points");
   var newPoints = parseInt(currentPoints) + pinCount;
-  $('#' + selectedFrameID).attr('points', newPoints);
+  $("#" + selectedFrameID).attr("points", newPoints);
 
   if (
-    pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '1-1-1-1-1' &&
-    ball == '1'
+    pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5 == "1-1-1-1-1" &&
+    ball == "1"
   ) {
-    $('#' + selectedFrameID).text('X');
+    $("#" + selectedFrameID).text("X");
   } else if (
-    pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '1-1-1-1-0' &&
-    ball == '1'
+    pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5 == "1-1-1-1-0" &&
+    ball == "1"
   ) {
-    $('#' + selectedFrameID).text('R');
+    $("#" + selectedFrameID).text("R");
   } else if (
-    pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '0-1-1-1-1' &&
-    ball == '1'
+    pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5 == "0-1-1-1-1" &&
+    ball == "1"
   ) {
-    $('#' + selectedFrameID).text('L');
+    $("#" + selectedFrameID).text("L");
   } else if (
-    pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '0-1-1-1-0' &&
-    ball == '1'
+    pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5 == "0-1-1-1-0" &&
+    ball == "1"
   ) {
-    $('#' + selectedFrameID).text('A');
+    $("#" + selectedFrameID).text("A");
   } else if (
-    pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '1-1-1-0-0' &&
-    ball == '1'
+    pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5 == "1-1-1-0-0" &&
+    ball == "1"
   ) {
-    $('#' + selectedFrameID).text('C');
+    $("#" + selectedFrameID).text("C");
   } else if (
-    pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '0-0-1-1-1' &&
-    ball == '1'
+    pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5 == "0-0-1-1-1" &&
+    ball == "1"
   ) {
-    $('#' + selectedFrameID).text('C');
+    $("#" + selectedFrameID).text("C");
   } else if (
-    pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '0-0-1-0-0' &&
-    ball == '1'
+    pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5 == "0-0-1-0-0" &&
+    ball == "1"
   ) {
-    $('#' + selectedFrameID).text('H');
+    $("#" + selectedFrameID).text("H");
   } else if (
-    pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '0-0-1-1-0' &&
-    ball == '1'
+    pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5 == "0-0-1-1-0" &&
+    ball == "1"
   ) {
-    $('#' + selectedFrameID).text('S');
+    $("#" + selectedFrameID).text("S");
   } else if (
-    pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '0-1-1-0-0' &&
-    ball == '1'
+    pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5 == "0-1-1-0-0" &&
+    ball == "1"
   ) {
-    $('#' + selectedFrameID).text('S');
+    $("#" + selectedFrameID).text("S");
   } else if (
-    pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '1-1-1-1-1' &&
-    ball == '2' &&
-    $('#' + selectedFrameID).attr('points') != '15'
+    pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5 == "1-1-1-1-1" &&
+    ball == "2" &&
+    $("#" + selectedFrameID).attr("points") != "15"
   ) {
-    $('#' + selectedFrameID).text('/');
+    $("#" + selectedFrameID).text("/");
   } else if (
-    pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '1-1-1-1-1' &&
-    ball == '2' &&
-    $('#' + selectedFrameID).attr('points') == '15' &&
-    frame == '10'
+    pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5 == "1-1-1-1-1" &&
+    ball == "2" &&
+    $("#" + selectedFrameID).attr("points") == "15" &&
+    frame == "10"
   ) {
-    $('#' + selectedFrameID).text('X');
+    $("#" + selectedFrameID).text("X");
   } else if (
-    pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '1-1-1-1-1' &&
-    frame == '10' &&
-    ball == '3' &&
-    $('#' + game + '-' + player + '-' + frame + '-1').attr('points') == '15' &&
-    '15' &&
-    $('#' + game + '-' + player + '-' + frame + '-2').attr('points') != '15'
+    pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5 == "1-1-1-1-1" &&
+    frame == "10" &&
+    ball == "3" &&
+    $("#" + game + "-" + player + "-" + frame + "-1").attr("points") == "15" &&
+    "15" &&
+    $("#" + game + "-" + player + "-" + frame + "-2").attr("points") != "15"
   ) {
-    $('#' + selectedFrameID).text('/');
+    $("#" + selectedFrameID).text("/");
   } else if (
-    pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '1-1-1-1-1' &&
-    frame == '10' &&
-    ball == '3' &&
-    $('#' + game + '-' + player + '-' + frame + '-1').attr('points') == '15' &&
-    $('#' + game + '-' + player + '-' + frame + '-2').attr('points') == '15'
+    pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5 == "1-1-1-1-1" &&
+    frame == "10" &&
+    ball == "3" &&
+    $("#" + game + "-" + player + "-" + frame + "-1").attr("points") == "15" &&
+    $("#" + game + "-" + player + "-" + frame + "-2").attr("points") == "15"
   ) {
-    $('#' + selectedFrameID).text('X');
+    $("#" + selectedFrameID).text("X");
   } else if (
-    pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5 == '1-1-1-1-1' &&
-    frame == '10' &&
-    ball == '3' &&
-    $('#' + game + '-' + player + '-' + frame + '-2').attr('pins') ==
-      '1-1-1-1-1' &&
-    $('#' + game + '-' + player + '-' + frame + '-2').attr('points') != '15'
+    pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5 == "1-1-1-1-1" &&
+    frame == "10" &&
+    ball == "3" &&
+    $("#" + game + "-" + player + "-" + frame + "-2").attr("pins") ==
+      "1-1-1-1-1" &&
+    $("#" + game + "-" + player + "-" + frame + "-2").attr("points") != "15"
   ) {
-    $('#' + selectedFrameID).text('X');
+    $("#" + selectedFrameID).text("X");
   } else {
-    $('#' + selectedFrameID).text(newPoints.toString());
+    $("#" + selectedFrameID).text(newPoints.toString());
   }
 
-  $('#' + selectedFrameID).attr(
-    'pins',
-    pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5
+  $("#" + selectedFrameID).attr(
+    "pins",
+    pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5
   );
   ball = parseInt(ball) + 1;
   if (ball < 4) {
-    $('#' + game + '-' + player + '-' + frame + '-' + ball.toString()).attr(
-      'pins',
-      pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5
+    $("#" + game + "-" + player + "-" + frame + "-" + ball.toString()).attr(
+      "pins",
+      pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5
     );
-    $('#' + game + '-' + player + '-' + frame + '-' + ball.toString()).attr(
-      'points',
-      '0'
+    $("#" + game + "-" + player + "-" + frame + "-" + ball.toString()).attr(
+      "points",
+      "0"
     );
-    $('#' + game + '-' + player + '-' + frame + '-' + ball.toString()).text('');
+    $("#" + game + "-" + player + "-" + frame + "-" + ball.toString()).text("");
   }
   ball = ball + 1;
   if (ball < 4) {
-    $('#' + game + '-' + player + '-' + frame + '-' + ball.toString()).attr(
-      'pins',
-      pin1 + '-' + pin2 + '-' + pin3 + '-' + pin4 + '-' + pin5
+    $("#" + game + "-" + player + "-" + frame + "-" + ball.toString()).attr(
+      "pins",
+      pin1 + "-" + pin2 + "-" + pin3 + "-" + pin4 + "-" + pin5
     );
-    $('#' + game + '-' + player + '-' + frame + '-' + ball.toString()).attr(
-      'points',
-      '0'
+    $("#" + game + "-" + player + "-" + frame + "-" + ball.toString()).attr(
+      "points",
+      "0"
     );
-    $('#' + game + '-' + player + '-' + frame + '-' + ball.toString()).text('');
+    $("#" + game + "-" + player + "-" + frame + "-" + ball.toString()).text("");
   }
 
   onChangeCalculateAllFrameTotals(selectedFrameID);
 }
 
 function onChangeCalculateAllFrameTotals(ballFrameID) {
-  var currentSelectedItem = ballFrameID.split('-');
+  var currentSelectedItem = ballFrameID.split("-");
   var game = currentSelectedItem[0];
   var player = currentSelectedItem[1];
   var frame = currentSelectedItem[2];
   var ball = currentSelectedItem[3];
 
   var framePoints =
-    parseInt($('#' + game + '-' + player + '-' + frame + '-1').attr('points')) +
-    parseInt($('#' + game + '-' + player + '-' + frame + '-2').attr('points')) +
-    parseInt($('#' + game + '-' + player + '-' + frame + '-3').attr('points'));
+    parseInt($("#" + game + "-" + player + "-" + frame + "-1").attr("points")) +
+    parseInt($("#" + game + "-" + player + "-" + frame + "-2").attr("points")) +
+    parseInt($("#" + game + "-" + player + "-" + frame + "-3").attr("points"));
 
-  if (frame == '1') {
-    $('#' + game + '-' + player + '-' + frame).attr(
-      'points',
+  if (frame == "1") {
+    $("#" + game + "-" + player + "-" + frame).attr(
+      "points",
       framePoints.toString()
     );
-    $('#' + game + '-' + player + '-' + frame).text(framePoints.toString());
-    $('#total-' + game + '-' + player).text(framePoints.toString());
+    $("#" + game + "-" + player + "-" + frame).text(framePoints.toString());
+    $("#total-" + game + "-" + player).text(framePoints.toString());
   }
-  if (frame == '2') {
-    $('#' + game + '-' + player + '-' + frame).attr(
-      'points',
+  if (frame == "2") {
+    $("#" + game + "-" + player + "-" + frame).attr(
+      "points",
       framePoints.toString()
     );
 
     //if previous a single Strike
-    if ($('#' + game + '-' + player + '-1-1').attr('pins') == '1-1-1-1-1') {
+    if ($("#" + game + "-" + player + "-1-1").attr("pins") == "1-1-1-1-1") {
       var previousframePoints =
         15 +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         ) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-2').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-2").attr("points")
         );
-      $('#' + game + '-' + player + '-1').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-1").text(previousframePoints.toString());
     }
     //if previous a spare
     if (
-      $('#' + game + '-' + player + '-1-2').attr('pins') == '1-1-1-1-1' &&
-      $('#' + game + '-' + player + '-1-2').attr('points') != '0'
+      $("#" + game + "-" + player + "-1-2").attr("pins") == "1-1-1-1-1" &&
+      $("#" + game + "-" + player + "-1-2").attr("points") != "0"
     ) {
       var previousframePoints =
         15 +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         );
-      $('#' + game + '-' + player + '-1').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-1").text(previousframePoints.toString());
     }
 
     framePoints =
-      parseInt($('#' + game + '-' + player + '-1').text()) + framePoints;
-    $('#' + game + '-' + player + '-' + frame).text(framePoints.toString());
-    $('#total-' + game + '-' + player).text(framePoints.toString());
+      parseInt($("#" + game + "-" + player + "-1").text()) + framePoints;
+    $("#" + game + "-" + player + "-" + frame).text(framePoints.toString());
+    $("#total-" + game + "-" + player).text(framePoints.toString());
   }
-  if (frame == '3') {
-    $('#' + game + '-' + player + '-' + frame).attr(
-      'points',
+  if (frame == "3") {
+    $("#" + game + "-" + player + "-" + frame).attr(
+      "points",
       framePoints.toString()
     );
 
     //if previous Double
     if (
-      $('#' + game + '-' + player + '-1-1').attr('pins') == '1-1-1-1-1' &&
-      $('#' + game + '-' + player + '-2-1').attr('pins') == '1-1-1-1-1'
+      $("#" + game + "-" + player + "-1-1").attr("pins") == "1-1-1-1-1" &&
+      $("#" + game + "-" + player + "-2-1").attr("pins") == "1-1-1-1-1"
     ) {
       var previousframePoints =
         30 +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         );
-      $('#' + game + '-' + player + '-1').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-1").text(previousframePoints.toString());
     }
     //if previous a single Strike
-    if ($('#' + game + '-' + player + '-2-1').attr('pins') == '1-1-1-1-1') {
+    if ($("#" + game + "-" + player + "-2-1").attr("pins") == "1-1-1-1-1") {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-1').text()) +
+        parseInt($("#" + game + "-" + player + "-1").text()) +
         15 +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         ) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-2').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-2").attr("points")
         );
-      $('#' + game + '-' + player + '-2').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-2").text(previousframePoints.toString());
     }
     //if previous a spare
     if (
-      $('#' + game + '-' + player + '-2-2').attr('pins') == '1-1-1-1-1' &&
-      $('#' + game + '-' + player + '-2-2').attr('points') != '0'
+      $("#" + game + "-" + player + "-2-2").attr("pins") == "1-1-1-1-1" &&
+      $("#" + game + "-" + player + "-2-2").attr("points") != "0"
     ) {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-1').text()) +
+        parseInt($("#" + game + "-" + player + "-1").text()) +
         15 +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         );
-      $('#' + game + '-' + player + '-2').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-2").text(previousframePoints.toString());
     }
 
     framePoints =
-      parseInt($('#' + game + '-' + player + '-2').text()) + framePoints;
-    $('#' + game + '-' + player + '-' + frame).text(framePoints.toString());
-    $('#total-' + game + '-' + player).text(framePoints.toString());
+      parseInt($("#" + game + "-" + player + "-2").text()) + framePoints;
+    $("#" + game + "-" + player + "-" + frame).text(framePoints.toString());
+    $("#total-" + game + "-" + player).text(framePoints.toString());
   }
-  if (frame == '4') {
-    $('#' + game + '-' + player + '-' + frame).attr(
-      'points',
+  if (frame == "4") {
+    $("#" + game + "-" + player + "-" + frame).attr(
+      "points",
       framePoints.toString()
     );
 
     //if previous Double
     if (
-      $('#' + game + '-' + player + '-2-1').attr('pins') == '1-1-1-1-1' &&
-      $('#' + game + '-' + player + '-3-1').attr('pins') == '1-1-1-1-1'
+      $("#" + game + "-" + player + "-2-1").attr("pins") == "1-1-1-1-1" &&
+      $("#" + game + "-" + player + "-3-1").attr("pins") == "1-1-1-1-1"
     ) {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-1').text()) +
+        parseInt($("#" + game + "-" + player + "-1").text()) +
         30 +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         );
-      $('#' + game + '-' + player + '-2').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-2").text(previousframePoints.toString());
     }
     //if previous a single Strike
-    if ($('#' + game + '-' + player + '-3-1').attr('pins') == '1-1-1-1-1') {
+    if ($("#" + game + "-" + player + "-3-1").attr("pins") == "1-1-1-1-1") {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-2').text()) +
+        parseInt($("#" + game + "-" + player + "-2").text()) +
         15 +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         ) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-2').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-2").attr("points")
         );
-      $('#' + game + '-' + player + '-3').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-3").text(previousframePoints.toString());
     }
     //if previous a spare
     if (
-      $('#' + game + '-' + player + '-3-2').attr('pins') == '1-1-1-1-1' &&
-      $('#' + game + '-' + player + '-3-2').attr('points') != '0'
+      $("#" + game + "-" + player + "-3-2").attr("pins") == "1-1-1-1-1" &&
+      $("#" + game + "-" + player + "-3-2").attr("points") != "0"
     ) {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-2').text()) +
+        parseInt($("#" + game + "-" + player + "-2").text()) +
         15 +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         );
-      $('#' + game + '-' + player + '-3').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-3").text(previousframePoints.toString());
     }
 
     framePoints =
-      parseInt($('#' + game + '-' + player + '-3').text()) + framePoints;
-    $('#' + game + '-' + player + '-' + frame).text(framePoints.toString());
-    $('#total-' + game + '-' + player).text(framePoints.toString());
-  } else if (frame == '5') {
-    $('#' + game + '-' + player + '-' + frame).attr(
-      'points',
+      parseInt($("#" + game + "-" + player + "-3").text()) + framePoints;
+    $("#" + game + "-" + player + "-" + frame).text(framePoints.toString());
+    $("#total-" + game + "-" + player).text(framePoints.toString());
+  } else if (frame == "5") {
+    $("#" + game + "-" + player + "-" + frame).attr(
+      "points",
       framePoints.toString()
     );
 
     //if previous Double
     if (
-      $('#' + game + '-' + player + '-3-1').attr('pins') == '1-1-1-1-1' &&
-      $('#' + game + '-' + player + '-4-1').attr('pins') == '1-1-1-1-1'
+      $("#" + game + "-" + player + "-3-1").attr("pins") == "1-1-1-1-1" &&
+      $("#" + game + "-" + player + "-4-1").attr("pins") == "1-1-1-1-1"
     ) {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-2').text()) +
+        parseInt($("#" + game + "-" + player + "-2").text()) +
         30 +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         );
-      $('#' + game + '-' + player + '-3').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-3").text(previousframePoints.toString());
     }
     //if previous a single Strike
-    if ($('#' + game + '-' + player + '-4-1').attr('pins') == '1-1-1-1-1') {
+    if ($("#" + game + "-" + player + "-4-1").attr("pins") == "1-1-1-1-1") {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-3').text()) +
-        parseInt($('#' + game + '-' + player + '-4').attr('points')) +
+        parseInt($("#" + game + "-" + player + "-3").text()) +
+        parseInt($("#" + game + "-" + player + "-4").attr("points")) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         ) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-2').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-2").attr("points")
         );
-      $('#' + game + '-' + player + '-4').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-4").text(previousframePoints.toString());
     }
     //if previous a spare
     if (
-      $('#' + game + '-' + player + '-4-2').attr('pins') == '1-1-1-1-1' &&
-      $('#' + game + '-' + player + '-4-2').attr('points') != '0'
+      $("#" + game + "-" + player + "-4-2").attr("pins") == "1-1-1-1-1" &&
+      $("#" + game + "-" + player + "-4-2").attr("points") != "0"
     ) {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-3').text()) +
-        parseInt($('#' + game + '-' + player + '-4').attr('points')) +
+        parseInt($("#" + game + "-" + player + "-3").text()) +
+        parseInt($("#" + game + "-" + player + "-4").attr("points")) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         );
-      $('#' + game + '-' + player + '-4').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-4").text(previousframePoints.toString());
     }
 
     framePoints =
-      parseInt($('#' + game + '-' + player + '-4').text()) + framePoints;
-    $('#' + game + '-' + player + '-' + frame).text(framePoints.toString());
-    $('#total-' + game + '-' + player).text(framePoints.toString());
-  } else if (frame == '6') {
-    $('#' + game + '-' + player + '-' + frame).attr(
-      'points',
+      parseInt($("#" + game + "-" + player + "-4").text()) + framePoints;
+    $("#" + game + "-" + player + "-" + frame).text(framePoints.toString());
+    $("#total-" + game + "-" + player).text(framePoints.toString());
+  } else if (frame == "6") {
+    $("#" + game + "-" + player + "-" + frame).attr(
+      "points",
       framePoints.toString()
     );
 
     //if previous Double
     if (
-      $('#' + game + '-' + player + '-4-1').attr('pins') == '1-1-1-1-1' &&
-      $('#' + game + '-' + player + '-5-1').attr('pins') == '1-1-1-1-1'
+      $("#" + game + "-" + player + "-4-1").attr("pins") == "1-1-1-1-1" &&
+      $("#" + game + "-" + player + "-5-1").attr("pins") == "1-1-1-1-1"
     ) {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-3').text()) +
+        parseInt($("#" + game + "-" + player + "-3").text()) +
         30 +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         );
-      $('#' + game + '-' + player + '-4').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-4").text(previousframePoints.toString());
     }
     //if previous a single Strike
-    if ($('#' + game + '-' + player + '-5-1').attr('pins') == '1-1-1-1-1') {
+    if ($("#" + game + "-" + player + "-5-1").attr("pins") == "1-1-1-1-1") {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-4').text()) +
-        parseInt($('#' + game + '-' + player + '-5').attr('points')) +
+        parseInt($("#" + game + "-" + player + "-4").text()) +
+        parseInt($("#" + game + "-" + player + "-5").attr("points")) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         ) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-2').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-2").attr("points")
         );
-      $('#' + game + '-' + player + '-5').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-5").text(previousframePoints.toString());
     }
     //if previous a spare
     if (
-      $('#' + game + '-' + player + '-5-2').attr('pins') == '1-1-1-1-1' &&
-      $('#' + game + '-' + player + '-5-2').attr('points') != '0'
+      $("#" + game + "-" + player + "-5-2").attr("pins") == "1-1-1-1-1" &&
+      $("#" + game + "-" + player + "-5-2").attr("points") != "0"
     ) {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-4').text()) +
-        parseInt($('#' + game + '-' + player + '-5').attr('points')) +
+        parseInt($("#" + game + "-" + player + "-4").text()) +
+        parseInt($("#" + game + "-" + player + "-5").attr("points")) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         );
-      $('#' + game + '-' + player + '-5').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-5").text(previousframePoints.toString());
     }
 
     framePoints =
-      parseInt($('#' + game + '-' + player + '-5').text()) + framePoints;
-    $('#' + game + '-' + player + '-' + frame).text(framePoints.toString());
-    $('#total-' + game + '-' + player).text(framePoints.toString());
-  } else if (frame == '7') {
-    $('#' + game + '-' + player + '-' + frame).attr(
-      'points',
+      parseInt($("#" + game + "-" + player + "-5").text()) + framePoints;
+    $("#" + game + "-" + player + "-" + frame).text(framePoints.toString());
+    $("#total-" + game + "-" + player).text(framePoints.toString());
+  } else if (frame == "7") {
+    $("#" + game + "-" + player + "-" + frame).attr(
+      "points",
       framePoints.toString()
     );
 
     //if previous Double
     if (
-      $('#' + game + '-' + player + '-5-1').attr('pins') == '1-1-1-1-1' &&
-      $('#' + game + '-' + player + '-6-1').attr('pins') == '1-1-1-1-1'
+      $("#" + game + "-" + player + "-5-1").attr("pins") == "1-1-1-1-1" &&
+      $("#" + game + "-" + player + "-6-1").attr("pins") == "1-1-1-1-1"
     ) {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-4').text()) +
+        parseInt($("#" + game + "-" + player + "-4").text()) +
         30 +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         );
-      $('#' + game + '-' + player + '-5').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-5").text(previousframePoints.toString());
     }
     //if previous a single Strike
-    if ($('#' + game + '-' + player + '-6-1').attr('pins') == '1-1-1-1-1') {
+    if ($("#" + game + "-" + player + "-6-1").attr("pins") == "1-1-1-1-1") {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-5').text()) +
-        parseInt($('#' + game + '-' + player + '-6').attr('points')) +
+        parseInt($("#" + game + "-" + player + "-5").text()) +
+        parseInt($("#" + game + "-" + player + "-6").attr("points")) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         ) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-2').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-2").attr("points")
         );
-      $('#' + game + '-' + player + '-6').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-6").text(previousframePoints.toString());
     }
     //if previous a spare
     if (
-      $('#' + game + '-' + player + '-6-2').attr('pins') == '1-1-1-1-1' &&
-      $('#' + game + '-' + player + '-6-2').attr('points') != '0'
+      $("#" + game + "-" + player + "-6-2").attr("pins") == "1-1-1-1-1" &&
+      $("#" + game + "-" + player + "-6-2").attr("points") != "0"
     ) {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-5').text()) +
-        parseInt($('#' + game + '-' + player + '-6').attr('points')) +
+        parseInt($("#" + game + "-" + player + "-5").text()) +
+        parseInt($("#" + game + "-" + player + "-6").attr("points")) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         );
-      $('#' + game + '-' + player + '-6').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-6").text(previousframePoints.toString());
     }
 
     framePoints =
-      parseInt($('#' + game + '-' + player + '-6').text()) + framePoints;
-    $('#' + game + '-' + player + '-' + frame).text(framePoints.toString());
-    $('#total-' + game + '-' + player).text(framePoints.toString());
-  } else if (frame == '8') {
-    $('#' + game + '-' + player + '-' + frame).attr(
-      'points',
+      parseInt($("#" + game + "-" + player + "-6").text()) + framePoints;
+    $("#" + game + "-" + player + "-" + frame).text(framePoints.toString());
+    $("#total-" + game + "-" + player).text(framePoints.toString());
+  } else if (frame == "8") {
+    $("#" + game + "-" + player + "-" + frame).attr(
+      "points",
       framePoints.toString()
     );
 
     //if previous Double
     if (
-      $('#' + game + '-' + player + '-6-1').attr('pins') == '1-1-1-1-1' &&
-      $('#' + game + '-' + player + '-7-1').attr('pins') == '1-1-1-1-1'
+      $("#" + game + "-" + player + "-6-1").attr("pins") == "1-1-1-1-1" &&
+      $("#" + game + "-" + player + "-7-1").attr("pins") == "1-1-1-1-1"
     ) {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-5').text()) +
+        parseInt($("#" + game + "-" + player + "-5").text()) +
         30 +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         );
-      $('#' + game + '-' + player + '-6').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-6").text(previousframePoints.toString());
     }
     //if previous a single Strike
-    if ($('#' + game + '-' + player + '-7-1').attr('pins') == '1-1-1-1-1') {
+    if ($("#" + game + "-" + player + "-7-1").attr("pins") == "1-1-1-1-1") {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-6').text()) +
-        parseInt($('#' + game + '-' + player + '-7').attr('points')) +
+        parseInt($("#" + game + "-" + player + "-6").text()) +
+        parseInt($("#" + game + "-" + player + "-7").attr("points")) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         ) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-2').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-2").attr("points")
         );
-      $('#' + game + '-' + player + '-7').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-7").text(previousframePoints.toString());
     }
     //if previous a spare
     if (
-      $('#' + game + '-' + player + '-7-2').attr('pins') == '1-1-1-1-1' &&
-      $('#' + game + '-' + player + '-7-2').attr('points') != '0'
+      $("#" + game + "-" + player + "-7-2").attr("pins") == "1-1-1-1-1" &&
+      $("#" + game + "-" + player + "-7-2").attr("points") != "0"
     ) {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-6').text()) +
-        parseInt($('#' + game + '-' + player + '-7').attr('points')) +
+        parseInt($("#" + game + "-" + player + "-6").text()) +
+        parseInt($("#" + game + "-" + player + "-7").attr("points")) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         );
-      $('#' + game + '-' + player + '-7').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-7").text(previousframePoints.toString());
     }
 
     framePoints =
-      parseInt($('#' + game + '-' + player + '-7').text()) + framePoints;
-    $('#' + game + '-' + player + '-' + frame).text(framePoints.toString());
-    $('#total-' + game + '-' + player).text(framePoints.toString());
-  } else if (frame == '9') {
-    $('#' + game + '-' + player + '-' + frame).attr(
-      'points',
+      parseInt($("#" + game + "-" + player + "-7").text()) + framePoints;
+    $("#" + game + "-" + player + "-" + frame).text(framePoints.toString());
+    $("#total-" + game + "-" + player).text(framePoints.toString());
+  } else if (frame == "9") {
+    $("#" + game + "-" + player + "-" + frame).attr(
+      "points",
       framePoints.toString()
     );
 
     //if previous Double
     if (
-      $('#' + game + '-' + player + '-7-1').attr('pins') == '1-1-1-1-1' &&
-      $('#' + game + '-' + player + '-8-1').attr('pins') == '1-1-1-1-1'
+      $("#" + game + "-" + player + "-7-1").attr("pins") == "1-1-1-1-1" &&
+      $("#" + game + "-" + player + "-8-1").attr("pins") == "1-1-1-1-1"
     ) {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-6').text()) +
+        parseInt($("#" + game + "-" + player + "-6").text()) +
         30 +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         );
-      $('#' + game + '-' + player + '-7').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-7").text(previousframePoints.toString());
     }
     //if previous a single Strike
-    if ($('#' + game + '-' + player + '-8-1').attr('pins') == '1-1-1-1-1') {
+    if ($("#" + game + "-" + player + "-8-1").attr("pins") == "1-1-1-1-1") {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-7').text()) +
-        parseInt($('#' + game + '-' + player + '-8').attr('points')) +
+        parseInt($("#" + game + "-" + player + "-7").text()) +
+        parseInt($("#" + game + "-" + player + "-8").attr("points")) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         ) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-2').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-2").attr("points")
         );
-      $('#' + game + '-' + player + '-8').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-8").text(previousframePoints.toString());
     }
     //if previous a spare
     if (
-      $('#' + game + '-' + player + '-8-2').attr('pins') == '1-1-1-1-1' &&
-      $('#' + game + '-' + player + '-8-2').attr('points') != '0'
+      $("#" + game + "-" + player + "-8-2").attr("pins") == "1-1-1-1-1" &&
+      $("#" + game + "-" + player + "-8-2").attr("points") != "0"
     ) {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-7').text()) +
-        parseInt($('#' + game + '-' + player + '-8').attr('points')) +
+        parseInt($("#" + game + "-" + player + "-7").text()) +
+        parseInt($("#" + game + "-" + player + "-8").attr("points")) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         );
-      $('#' + game + '-' + player + '-8').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-8").text(previousframePoints.toString());
     }
 
     framePoints =
-      parseInt($('#' + game + '-' + player + '-8').text()) + framePoints;
-    $('#' + game + '-' + player + '-' + frame).text(framePoints.toString());
-    $('#total-' + game + '-' + player).text(framePoints.toString());
-  } else if (frame == '10') {
-    $('#' + game + '-' + player + '-' + frame).attr(
-      'points',
+      parseInt($("#" + game + "-" + player + "-8").text()) + framePoints;
+    $("#" + game + "-" + player + "-" + frame).text(framePoints.toString());
+    $("#total-" + game + "-" + player).text(framePoints.toString());
+  } else if (frame == "10") {
+    $("#" + game + "-" + player + "-" + frame).attr(
+      "points",
       framePoints.toString()
     );
 
     //if previous Double
     if (
-      $('#' + game + '-' + player + '-8-1').attr('pins') == '1-1-1-1-1' &&
-      $('#' + game + '-' + player + '-9-1').attr('pins') == '1-1-1-1-1'
+      $("#" + game + "-" + player + "-8-1").attr("pins") == "1-1-1-1-1" &&
+      $("#" + game + "-" + player + "-9-1").attr("pins") == "1-1-1-1-1"
     ) {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-7').text()) +
+        parseInt($("#" + game + "-" + player + "-7").text()) +
         30 +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         );
-      $('#' + game + '-' + player + '-8').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-8").text(previousframePoints.toString());
     }
     //if previous a single Strike
-    if ($('#' + game + '-' + player + '-9-1').attr('pins') == '1-1-1-1-1') {
+    if ($("#" + game + "-" + player + "-9-1").attr("pins") == "1-1-1-1-1") {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-8').text()) +
-        parseInt($('#' + game + '-' + player + '-9').attr('points')) +
+        parseInt($("#" + game + "-" + player + "-8").text()) +
+        parseInt($("#" + game + "-" + player + "-9").attr("points")) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         ) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-2').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-2").attr("points")
         );
-      $('#' + game + '-' + player + '-9').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-9").text(previousframePoints.toString());
     }
     //if previous a spare
     if (
-      $('#' + game + '-' + player + '-9-2').attr('pins') == '1-1-1-1-1' &&
-      $('#' + game + '-' + player + '-9-2').attr('points') != '0'
+      $("#" + game + "-" + player + "-9-2").attr("pins") == "1-1-1-1-1" &&
+      $("#" + game + "-" + player + "-9-2").attr("points") != "0"
     ) {
       var previousframePoints =
-        parseInt($('#' + game + '-' + player + '-8').text()) +
-        parseInt($('#' + game + '-' + player + '-9').attr('points')) +
+        parseInt($("#" + game + "-" + player + "-8").text()) +
+        parseInt($("#" + game + "-" + player + "-9").attr("points")) +
         parseInt(
-          $('#' + game + '-' + player + '-' + frame + '-1').attr('points')
+          $("#" + game + "-" + player + "-" + frame + "-1").attr("points")
         );
-      $('#' + game + '-' + player + '-9').text(previousframePoints.toString());
+      $("#" + game + "-" + player + "-9").text(previousframePoints.toString());
     }
 
     framePoints =
-      parseInt($('#' + game + '-' + player + '-9').text()) + framePoints;
-    $('#' + game + '-' + player + '-' + frame).text(framePoints.toString());
-    $('#total-' + game + '-' + player).text(framePoints.toString());
+      parseInt($("#" + game + "-" + player + "-9").text()) + framePoints;
+    $("#" + game + "-" + player + "-" + frame).text(framePoints.toString());
+    $("#total-" + game + "-" + player).text(framePoints.toString());
   }
 
   calculateTeamPinfall(game);
@@ -1456,60 +1462,84 @@ function onChangeCalculateAllFrameTotals(ballFrameID) {
 
 function calculateTeamPinfall(game) {
   var teamPinfall = 0;
-  if ($('#total-' + game + '-1').text() != '') {
-    teamPinfall += parseInt($('#total-' + game + '-1').text(), 10);
+  if ($("#total-" + game + "-1").text() != "") {
+    teamPinfall += parseInt($("#total-" + game + "-1").text(), 10);
   }
-  if ($('#total-' + game + '-2').text() != '') {
-    teamPinfall += parseInt($('#total-' + game + '-2').text(), 10);
+  if ($("#total-" + game + "-2").text() != "") {
+    teamPinfall += parseInt($("#total-" + game + "-2").text(), 10);
   }
-  if ($('#total-' + game + '-3').text() != '') {
-    teamPinfall += parseInt($('#total-' + game + '-3').text(), 10);
+  if ($("#total-" + game + "-3").text() != "") {
+    teamPinfall += parseInt($("#total-" + game + "-3").text(), 10);
   }
-  if ($('#total-' + game + '-4').text() != '') {
-    teamPinfall += parseInt($('#total-' + game + '-4').text(), 10);
+  if ($("#total-" + game + "-4").text() != "") {
+    teamPinfall += parseInt($("#total-" + game + "-4").text(), 10);
   }
-  if ($('#total-' + game + '-5').text() != '') {
-    teamPinfall += parseInt($('#total-' + game + '-5').text(), 10);
+  if ($("#total-" + game + "-5").text() != "") {
+    teamPinfall += parseInt($("#total-" + game + "-5").text(), 10);
   }
-  if ($('#total-' + game + '-6').text() != '') {
-    teamPinfall += parseInt($('#total-' + game + '-6').text(), 10);
+  if ($("#total-" + game + "-6").text() != "") {
+    teamPinfall += parseInt($("#total-" + game + "-6").text(), 10);
   }
-  $('#teamPinfall').text(teamPinfall.toString());
+  $("#teamPinfall").text(teamPinfall.toString());
 }
 
 //Listens to click on pin on the pin deck
-$('#pin1').on('click', function () {
-  $(this).toggleClass('pinDown');
+$("#pin1").on("click", function () {
+  $(this).toggleClass("pinDown");
   selectedPin(0, 2, selectedFrameID);
 });
-$('#pin2').on('click', function () {
-  $(this).toggleClass('pinDown');
+$("#pin2").on("click", function () {
+  $(this).toggleClass("pinDown");
   selectedPin(1, 3, selectedFrameID);
 });
-$('#pin3').on('click', function () {
-  $(this).toggleClass('pinDown');
+$("#pin3").on("click", function () {
+  $(this).toggleClass("pinDown");
   selectedPin(2, 5, selectedFrameID);
 });
-$('#pin4').on('click', function () {
-  $(this).toggleClass('pinDown');
+$("#pin4").on("click", function () {
+  $(this).toggleClass("pinDown");
   selectedPin(3, 3, selectedFrameID);
 });
-$('#pin5').on('click', function () {
-  $(this).toggleClass('pinDown');
+$("#pin5").on("click", function () {
+  $(this).toggleClass("pinDown");
   selectedPin(4, 2, selectedFrameID);
 });
-$('#missedBtn').on('click', function () {
+$("#missedBtn").on("click", function () {
   selectedPin(-1, 0, selectedFrameID);
 });
-$('#nextBtn').on('click', function () {
+$("#nextBtn").on("click", function () {
   //Check if nothing is selected
   if (selectedFrameID != undefined) {
     console.log(selectedFrameID);
+    var currentSelectedItem = selectedFrameID.split("-");
+    var game = currentSelectedItem[0];
+    var player = currentSelectedItem[1];
+    var frame = currentSelectedItem[2];
+    var ball = currentSelectedItem[3];
+
+    $(`#${selectedFrameID}`).removeClass("active");
+    $("#" + game + "-" + player + "-" + frame).removeClass("active");
+
+    if (ball < 3) {
+      ball++;
+    } else {
+      frame++;
+      ball = 1;
+    }
+
+    selectedFrameID = `${game}-${player}-${frame}-${ball}`;
+    console.log(selectedFrameID);
+    selectedBallFrame(selectedFrameID);
   }
 });
-$('#prevBtn').on('click', function () {
+$("#prevBtn").on("click", function () {
   if (selectedFrameID != undefined) {
     console.log(selectedFrameID);
+    var currentSelectedItem = selectedFrameID.split("-");
+    var game = currentSelectedItem[0];
+    var player = currentSelectedItem[1];
+    var frame = currentSelectedItem[2];
+    var ball = currentSelectedItem[3];
   }
 });
 
