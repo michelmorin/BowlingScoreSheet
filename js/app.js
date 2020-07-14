@@ -798,7 +798,6 @@ function selectedBallFrame(ballID) {
   var player = idArray[1];
   var frame = idArray[2];
   var ball = idArray[3];
-  //$("td").removeClass("active");
   $("#" + game + "-" + player + "-" + frame).addClass("active");
   $("#" + game + "-" + player + "-" + frame + "-" + ball).addClass("active");
   selectedFrameID = ballID;
@@ -1510,15 +1509,11 @@ $("#missedBtn").on("click", function () {
 $("#nextBtn").on("click", function () {
   //Check if nothing is selected
   if (selectedFrameID != undefined) {
-    console.log(selectedFrameID);
     var currentSelectedItem = selectedFrameID.split("-");
     var game = currentSelectedItem[0];
     var player = currentSelectedItem[1];
     var frame = currentSelectedItem[2];
     var ball = currentSelectedItem[3];
-
-    $(`#${selectedFrameID}`).removeClass("active");
-    $("#" + game + "-" + player + "-" + frame).removeClass("active");
 
     if (ball < 3) {
       ball++;
@@ -1527,9 +1522,48 @@ $("#nextBtn").on("click", function () {
       ball = 1;
     }
 
+    var currentPoints = $(
+      "#" + game + "-" + player + "-" + frame + "-" + ball
+    ).attr("points");
+
+    console.log("currentPoints: " + currentPoints);
+
+    if (ball == "2" || ball == "3") {
+      var currentPinsDown = $(
+        "#" + game + "-" + player + "-" + frame + "-" + ball
+      ).attr("pins");
+
+      console.log("currentPinsDown: " + currentPinsDown);
+
+      if (currentPinsDown == "1-1-1-1-1" && currentPoints == "0") {
+        if (frame != "10") {
+          if (ball == 2) {
+            //var currentPoints = $(
+            //  "#" + game + "-" + player + "-" + frame + "-" + ball
+            //).attr("points");
+            //var currentPinsDown = $(
+            //  "#" + game + "-" + player + "-" + frame + "-" + ball
+            //).attr("pins");
+            console.log("points: " + currentPoints);
+            console.log("pinsdown: " + currentPinsDown);
+            if (currentPinsDown == "1-1-1-1-1" && currentPoints == "0") {
+              //ball = parseInt(ball) - 1;
+              //frame++;
+              //ball = 1;
+            }
+          }
+        } else {
+          $("#" + selectedFrameID).attr("pins", "0-0-0-0-0");
+        }
+      } else {
+      }
+    } else {
+      //ball++;
+    }
+
     selectedFrameID = `${game}-${player}-${frame}-${ball}`;
     console.log(selectedFrameID);
-    selectedBallFrame(selectedFrameID);
+    $(`#${selectedFrameID}`).click();
   }
 });
 $("#prevBtn").on("click", function () {
